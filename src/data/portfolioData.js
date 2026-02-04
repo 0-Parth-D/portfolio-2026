@@ -16,9 +16,11 @@ export const portfolioData = {
       phone: "+1 (979) 492-9902", // [file:1]
       linkedin: "https://linkedin.com/in/parth-deshmukh-a1542b238", // [file:1]
       github: "https://github.com/0-Parth-D", // inferred handle from email; change if different
-      profileImage:
-        "https://media.licdn.com/dms/image/v2/D4D03AQHmF0UOud8OtQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1720902504147?e=1769040000&v=beta&t=lJy5XJBRaLABxjtUJBuL9Py9ldFlFD1GyGxQMfuVVe4",
+      profileImage: "/profile.jpg", // Path to profile image - place your profile.jpg in the public folder
+      // Alternative: Use LinkedIn URL if local image is not available
+      // profileImage: "https://media.licdn.com/dms/image/v2/D4D03AQHmF0UOud8OtQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1720902504147?e=1769040000&v=beta&t=lJy5XJBRaLABxjtUJBuL9Py9ldFlFD1GyGxQMfuVVe4",
       resumeUrl: "/resume.pdf", // Path to resume file - place your resume.pdf in the public folder
+      portfolioUrl: "/portfolio.pdf", // Path to portfolio PDF - place your portfolio.pdf in the public folder
     },
   
     // Work Experience

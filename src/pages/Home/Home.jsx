@@ -209,10 +209,23 @@ function Home({ navigate }) {
               src={personal.profileImage}
               alt={`Profile picture of ${personal.fullName}`}
               className="profile-image"
+              onError={(e) => {
+                // Fallback to a default placeholder if the image fails to load
+                const fallbackImage = '/profile.jpg'
+                const currentSrc = e.target.src
+                // Only try fallback if we haven't already tried it
+                if (!currentSrc.includes('profile.jpg') && !currentSrc.includes('placeholder')) {
+                  e.target.src = fallbackImage
+                } else {
+                  // If fallback also fails, use a data URI placeholder or hide
+                  e.target.onerror = null // Prevent infinite loop
+                  e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect fill="%23333" width="400" height="400"/%3E%3Ctext fill="%23999" font-family="sans-serif" font-size="20" x="50%25" y="50%25" text-anchor="middle" dy=".3em"%3EProfile Image%3C/text%3E%3C/svg%3E'
+                }
+              }}
             />
           </div>
           <h1 id="hero-heading" className="hero-name">
-            Hello! I'm <span className="name-highlight">{personal.firstName}</span> {personal.lastName}
+            Howdy! I'm <span className="name-highlight">{personal.firstName}</span> {personal.lastName}
           </h1>
         </div>
 

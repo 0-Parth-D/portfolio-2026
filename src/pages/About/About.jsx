@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { portfolioData } from '../../data/portfolioData'
 import SkillsModal from '../../components/SkillsModal/SkillsModal'
+import PortfolioModal from '../../components/PortfolioModal/PortfolioModal'
 import Button from '../../components/Button/Button'
 import './About.css'
 
@@ -79,6 +80,9 @@ function About() {
     categoryTitle: '',
     skills: []
   })
+  
+  // Portfolio modal state
+  const [portfolioModalOpen, setPortfolioModalOpen] = useState(false)
   
   const MAX_VISIBLE_SKILLS = 6
   
@@ -162,6 +166,20 @@ function About() {
               aria-label="Download resume"
             >
               Download Resume
+            </Button>
+            <Button
+              type="secondary"
+              onClick={() => {
+                // Open portfolio modal
+                if (personal.portfolioUrl) {
+                  setPortfolioModalOpen(true)
+                } else {
+                  console.warn('Portfolio URL not configured. Please add portfolioUrl to portfolioData.js')
+                }
+              }}
+              aria-label="View portfolio"
+            >
+              View Portfolio
             </Button>
           </div>
         </div>
@@ -417,6 +435,13 @@ function About() {
           skills={modalState.skills}
         />
       </section>
+
+      {/* Portfolio Modal */}
+      <PortfolioModal
+        isOpen={portfolioModalOpen}
+        onClose={() => setPortfolioModalOpen(false)}
+        portfolioUrl={personal.portfolioUrl}
+      />
 
       {/* Outside of Work / Personal Section */}
       <section className="about-section personal-section scroll-animate" ref={personalRef} aria-labelledby="personal-heading">
