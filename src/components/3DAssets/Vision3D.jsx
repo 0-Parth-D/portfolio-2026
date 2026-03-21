@@ -1,9 +1,11 @@
-import { useRef } from 'react'
+import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { MeshDistortMaterial, OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
+import { getAccentColorHex } from '../../theme/accentColor'
 
 function Vision3D() {
+  const accent = useMemo(() => getAccentColorHex(), [])
   const mainRef = useRef()
   const ring1Ref = useRef()
   const ring2Ref = useRef()
@@ -40,14 +42,14 @@ function Vision3D() {
       />
       <ambientLight intensity={0.4} />
       <directionalLight position={[5, 5, 5]} intensity={1} />
-      <pointLight position={[5, -5, 5]} intensity={0.6} color="#A7D129" />
-      <pointLight position={[-5, 5, -5]} intensity={0.6} color="#A7D129" />
+      <pointLight position={[5, -5, 5]} intensity={0.6} color={accent} />
+      <pointLight position={[-5, 5, -5]} intensity={0.6} color={accent} />
       
       {/* Main central shape - dodecahedron for future/vision */}
       <mesh ref={mainRef} position={[0, 0, 0]}>
         <dodecahedronGeometry args={[1.6, 0]} />
         <MeshDistortMaterial
-          color="#A7D129"
+          color={accent}
           attach="material"
           distort={0.4}
           speed={2.5}
@@ -62,8 +64,8 @@ function Vision3D() {
       <mesh ref={ring1Ref} rotation={[Math.PI / 4, 0, 0]}>
         <torusGeometry args={[2.6, 0.08, 16, 100]} />
         <meshStandardMaterial
-          color="#A7D129"
-          emissive="#A7D129"
+          color={accent}
+          emissive={accent}
           emissiveIntensity={0.5}
           metalness={0.9}
           roughness={0.1}
@@ -73,8 +75,8 @@ function Vision3D() {
       <mesh ref={ring2Ref} rotation={[0, Math.PI / 4, Math.PI / 2]}>
         <torusGeometry args={[3, 0.08, 16, 100]} />
         <meshStandardMaterial
-          color="#A7D129"
-          emissive="#A7D129"
+          color={accent}
+          emissive={accent}
           emissiveIntensity={0.4}
           metalness={0.9}
           roughness={0.1}
@@ -99,8 +101,8 @@ function Vision3D() {
             >
               <icosahedronGeometry args={[0.2, 0]} />
               <meshStandardMaterial
-                color="#A7D129"
-                emissive="#A7D129"
+                color={accent}
+                emissive={accent}
                 emissiveIntensity={1}
                 metalness={0.7}
                 roughness={0.3}
@@ -114,8 +116,8 @@ function Vision3D() {
       <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, -1.5, 0]}>
         <ringGeometry args={[2, 2.4, 64]} />
         <meshStandardMaterial
-          color="#A7D129"
-          emissive="#A7D129"
+          color={accent}
+          emissive={accent}
           emissiveIntensity={0.3}
           side={THREE.DoubleSide}
           transparent

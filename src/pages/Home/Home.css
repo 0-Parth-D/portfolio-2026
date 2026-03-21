@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: flex-start;
   padding: 8rem 6rem 4rem;
-  gap: 18rem;
+  gap: 11rem;
 }
 
 /* Scroll Animation Styles */
@@ -80,13 +80,12 @@
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   gap: 6rem;
-  align-items: center;
+  align-items: start;
   position: relative;
-  perspective: 1000px;
   margin-top: 4rem;
 }
 
-/* Floating 3D element in hero */
+/* Subtle hero glow (static — calmer than animated float) */
 .hero-section::before {
   content: '';
   position: absolute;
@@ -94,23 +93,10 @@
   right: -5rem;
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle, rgba(167, 209, 41, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgb(from var(--color-accent) r g b / 0.08) 0%, transparent 70%);
   border-radius: 50%;
-  animation: float3d 6s ease-in-out infinite;
   pointer-events: none;
   z-index: -1;
-  transform-style: preserve-3d;
-}
-
-@keyframes float3d {
-  0%, 100% {
-    transform: translateY(0) rotateX(0deg) rotateY(0deg);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translateY(-30px) rotateX(10deg) rotateY(15deg);
-    opacity: 1;
-  }
 }
 
 /* Respect reduced motion */
@@ -130,6 +116,12 @@
     opacity: 1 !important;
     transition: none !important;
   }
+
+  .profile-image-wrapper:hover {
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
   
   .case-study-card:hover,
   .experience-item:hover,
@@ -144,38 +136,60 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2rem;
-  transform-style: preserve-3d;
-  animation: slideIn3d 1s ease-out;
+  gap: 1.5rem;
+  padding-top: 0.35rem;
+  animation: heroFadeIn 0.6s ease-out;
 }
 
-@keyframes slideIn3d {
+@keyframes heroFadeIn {
   from {
     opacity: 0;
-    transform: translateX(-50px) rotateY(-15deg);
+    transform: translateX(-12px);
   }
   to {
     opacity: 1;
-    transform: translateX(0) rotateY(0deg);
+    transform: translateX(0);
   }
 }
 
+/* Frosted ring + soft depth — matches case-study glass, not a separate “sticker” */
 .profile-image-wrapper {
-  width: 120px;
-  height: 120px;
+  --profile-ring: rgba(255, 255, 255, 0.14);
+  width: 132px;
+  height: 132px;
+  padding: 3px;
   border-radius: 50%;
+  box-sizing: border-box;
   overflow: hidden;
-  border: 3px solid var(--green-primary);
-  box-shadow: 0 8px 24px rgba(167, 209, 41, 0.2);
-  transform-style: preserve-3d;
-  transition: transform 0.1s ease-out;
-  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--profile-ring);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
+.profile-image-wrapper:hover {
+  --profile-ring: rgb(from var(--color-accent) r g b / 0.28);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow:
+    0 14px 44px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgb(from var(--color-accent) r g b / 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .profile-image {
   width: 100%;
   height: 100%;
+  display: block;
+  border-radius: 50%;
   object-fit: cover;
+  object-position: center center;
 }
 
 .hero-name {
@@ -207,18 +221,18 @@
   flex-direction: column;
   gap: 2rem;
   padding-left: 2rem;
-  transform-style: preserve-3d;
-  animation: slideIn3dRight 1s ease-out 0.2s both;
+  padding-top: 0.35rem;
+  animation: heroFadeInRight 0.6s ease-out 0.08s both;
 }
 
-@keyframes slideIn3dRight {
+@keyframes heroFadeInRight {
   from {
     opacity: 0;
-    transform: translateX(50px) rotateY(15deg);
+    transform: translateX(12px);
   }
   to {
     opacity: 1;
-    transform: translateX(0) rotateY(0deg);
+    transform: translateX(0);
   }
 }
 
@@ -255,6 +269,16 @@
   color: var(--color-gray-200);
   line-height: 1.6;
   margin: 0;
+  max-width: 42rem;
+}
+
+.hero-subtitle-secondary {
+  font-size: clamp(0.9375rem, 1.35vw, 1.0625rem);
+  font-weight: 400;
+  color: var(--color-gray-400);
+  line-height: 1.65;
+  margin: -0.5rem 0 0 0;
+  max-width: 40rem;
 }
 
 .hero-buttons {
@@ -285,8 +309,8 @@
   }
 
   .profile-image-wrapper {
-    width: 100px;
-    height: 100px;
+    width: 112px;
+    height: 112px;
   }
 }
 
@@ -311,8 +335,8 @@
   }
 
   .profile-image-wrapper {
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
   }
 
   .hero-buttons .btn {
@@ -365,7 +389,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
-  perspective: 1000px;
 }
 
 .case-study-card {
@@ -374,18 +397,55 @@
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 20px;
-  padding: 2rem;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.1s ease-out;
-  transform-style: preserve-3d;
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   position: relative;
-  cursor: pointer;
+  cursor: default;
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   overflow: hidden;
+}
+
+.case-study-card-thumb-wrap {
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+  margin: 0;
+  aspect-ratio: 16 / 9;
+  max-height: 200px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.case-study-card-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.case-study-card .case-study-title,
+.case-study-card .case-study-description,
+.case-study-card .case-study-tech,
+.case-study-card .case-study-links {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.case-study-card .case-study-title {
+  padding-top: 1.5rem;
+}
+
+.case-study-card .case-study-links {
+  padding-bottom: 2rem;
+}
+
+.case-study-card:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent-transparent);
 }
 
 .case-study-card::before {
@@ -396,7 +456,7 @@
   right: 0;
   bottom: 0;
   border-radius: 20px;
-  background: linear-gradient(135deg, rgba(167, 209, 41, 0.08) 0%, transparent 100%);
+  background: linear-gradient(135deg, rgb(from var(--color-accent) r g b / 0.08) 0%, transparent 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -521,9 +581,10 @@
 }
 
 .expertise-pill:hover {
-  background-color: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-primary);
+  background-color: var(--accent-violet);
+  background-image: var(--accent-gradient);
+  border-color: transparent;
+  color: #ffffff;
   transform: translateY(-4px) rotateX(10deg) scale(1.05);
   box-shadow: 0 8px 16px var(--color-accent-transparent-dark);
 }
@@ -655,8 +716,8 @@
   background: linear-gradient(
     to bottom,
     transparent,
-    rgba(167, 209, 41, 0.3) 10%,
-    rgba(167, 209, 41, 0.3) 90%,
+    rgb(from var(--color-accent) r g b / 0.3) 10%,
+    rgb(from var(--color-accent) r g b / 0.3) 90%,
     transparent
   );
   min-height: 100%;

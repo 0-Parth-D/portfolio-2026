@@ -90,7 +90,7 @@
 }
 
 .portfolio-modal-close:hover {
-  background: rgba(167, 209, 41, 0.2);
+  background: rgb(from var(--color-accent) r g b / 0.2);
   border-color: var(--green-primary);
   color: var(--green-primary);
   transform: rotate(90deg);

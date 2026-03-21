@@ -1,7 +1,8 @@
 import { Canvas } from '@react-three/fiber'
 import { Suspense } from 'react'
 
-function Scene3D({ Component, className }) {
+function Scene3D({ component, className }) {
+  const Child = component
   return (
     <div className={`scene-3d-container ${className || ''}`}>
       <Canvas
@@ -16,7 +17,7 @@ function Scene3D({ Component, className }) {
         style={{ width: '100%', height: '100%' }}
       >
         <Suspense fallback={null}>
-          <Component />
+          <Child />
         </Suspense>
       </Canvas>
     </div>

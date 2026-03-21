@@ -1,14 +1,25 @@
 // Portfolio data aligned with resume (Parth_Deshmukh_Resume_DS)
 
+const GITHUB_PROFILE = "https://github.com/0-Parth-D"
+const GITHUB_REPOS = {
+  satelliteSegmentation: "https://github.com/0-Parth-D/Satellite-Segmentation-SAM3",
+  ragAssistant: "https://github.com/0-Parth-D/RAG-Powered-Code-Assistant",
+  aslClassification: "https://github.com/0-Parth-D/ASL-Classification-Project",
+  datasetExploration: "https://github.com/0-Parth-D/Dataset-Extraction-and-Exploration",
+}
+const PLACEHOLDER_IMG = "/project-card-placeholder.svg"
+
 export const portfolioData = {
   personal: {
     firstName: "Parth",
     lastName: "Deshmukh",
     fullName: "Parth Sachin Deshmukh",
-    title: "M.S. Computer Science · Data Science & ML",
+    title: "ML & Software Engineer · M.S. Computer Science (Data Science & ML)",
+    heroSubtitle:
+      "HCI-minded UI for analytics — shipping models, RAG systems, and tooling end-to-end.",
     location: "College Station, TX",
     tagline:
-      "Building RAG systems, computer vision pipelines, and data platforms — from satellite segmentation to packaged developer tools.",
+      "RAG, computer vision, and data platforms in production shape: PyTorch, LangChain, Docker, CI/CD, and packaged releases.",
     bio:
       "M.S. Computer Science student at Texas A&M with experience in full-stack data visualization (IIT Bombay) and UI/UX for analytics (HTS Tech). I work across deep learning, LangChain/RAG, and production-style packaging with Docker, CI/CD, and cloud deployment.",
     email: "parthdeshmukh321@gmail.com",
@@ -18,7 +29,14 @@ export const portfolioData = {
     website: "https://parthdeshmukh.vercel.app",
     profileImage: "/1720902504174.jpg",
     resumeUrl: "/resume.pdf",
-    portfolioUrl: "/portfolio.pdf",
+    /** Set to a path under public/ or a Drive URL when you have a PDF; empty hides "View Portfolio" on About */
+    portfolioUrl: "",
+  },
+
+  seo: {
+    siteName: "Parth Deshmukh",
+    defaultDescription:
+      "Parth Deshmukh — ML engineer and software engineer. RAG, computer vision, data platforms, PyTorch, LangChain, Docker, and product-minded UI for analytics.",
   },
 
   experience: [
@@ -129,10 +147,16 @@ export const portfolioData = {
       description:
         "Semantic and instance segmentation with SAM3 (Segment Anything) to extract structural features — buildings, roads, water — from high-resolution satellite imagery. Custom PyTorch and NumPy evaluation with per-class IoU and pixel accuracy (mIoU 0.62, pixel accuracy 0.78 on 17 test images). Optimized GPU memory using inference-mode execution and CUDA cache management for large images.",
       technologies: ["SAM3", "PyTorch", "NumPy", "Python"],
-      image: "",
+      image: PLACEHOLDER_IMG,
       link: "",
-      github: "",
+      github: GITHUB_REPOS.satelliteSegmentation,
       featured: true,
+      role: "Solo research / engineering — end-to-end pipeline and evaluation.",
+      contributions: [
+        "SAM3-based segmentation workflow for multi-class land-cover features",
+        "Custom PyTorch/NumPy metrics (IoU, pixel accuracy) on a held-out test set",
+        "GPU memory tuning: inference mode, CUDA cache handling for large tiles",
+      ],
       problem:
         "Automating reliable extraction of infrastructure and land-cover features from large, high-resolution satellite scenes without running out of GPU memory.",
       approach:
@@ -152,10 +176,16 @@ export const portfolioData = {
       description:
         "Retrieval-Augmented Generation system using LangChain and a local LLM (Ollama / Llama 3) for semantic search across 5,000+ documentation pages stored in ChromaDB. Packaged for PyPI and Conda with scikit-build-core (Linux/Windows). GitHub Actions CI/CD with Docker; pytest coverage around 85%.",
       technologies: ["LangChain", "ChromaDB", "CMake", "Docker", "CI/CD"],
-      image: "",
+      image: PLACEHOLDER_IMG,
       link: "",
-      github: "",
+      github: GITHUB_REPOS.ragAssistant,
       featured: true,
+      role: "Lead engineer — retrieval stack, packaging, and CI/CD.",
+      contributions: [
+        "ChromaDB indexing and LangChain orchestration with a local LLM",
+        "PyPI/Conda packages via scikit-build-core; multi-OS build matrix",
+        "Docker images and GitHub Actions; pytest suite (~85% coverage)",
+      ],
       problem:
         "Making large internal or project documentation searchable in a way that supports accurate, grounded answers for developers.",
       approach:
@@ -169,10 +199,11 @@ export const portfolioData = {
       description:
         "Deep learning CNN for American Sign Language recognition with OpenCV preprocessing. Deployed a containerized model on AWS EC2 using Docker, with GitHub Actions for CI/CD and automated testing.",
       technologies: ["TensorFlow", "Docker", "AWS", "GitHub Actions", "OpenCV"],
-      image: "",
+      image: PLACEHOLDER_IMG,
       link: "",
-      github: "",
+      github: GITHUB_REPOS.aslClassification,
       featured: false,
+      role: "End-to-end model and deployment.",
       problem: "Reliable gesture recognition under practical preprocessing and deployment constraints.",
       approach: "CNN with OpenCV-based preprocessing, containerized service, and CI/CD on GitHub Actions.",
       outcome: "Scalable inference path on AWS with automated testing in the pipeline.",
@@ -182,60 +213,74 @@ export const portfolioData = {
       description:
         "Analyzed Grubhub and Uber Eats datasets in Google BigQuery to uncover delivery performance patterns and operational inefficiencies, building KPI dashboards to support data-driven decisions.",
       technologies: ["SQL", "Google BigQuery", "Data Visualization", "Dashboards"],
-      image: "",
+      image: PLACEHOLDER_IMG,
       link: "",
-      github: "",
+      github: GITHUB_REPOS.datasetExploration,
       featured: false,
+      role: "Data analysis and dashboard design.",
     },
     {
       title: "Devanagari Character Recognition",
       description:
         "Developed a CNN-based character recognition system using OpenCV and transfer learning with ResNet and VGG, achieving high accuracy on handwritten Devanagari characters.",
       technologies: ["Python", "OpenCV", "TensorFlow", "CNN", "Transfer Learning"],
-      image: "",
+      image: PLACEHOLDER_IMG,
       link: "",
-      github: "",
+      github: GITHUB_PROFILE,
       featured: true,
+      role: "Solo — model design, training, and evaluation.",
+      contributions: [
+        "CNN pipeline with OpenCV preprocessing for handwritten Devanagari",
+        "Transfer learning with ResNet and VGG backbones",
+        "Rigorous train/val evaluation and accuracy reporting",
+      ],
+      problem: "Accurate recognition of handwritten Devanagari under varied stroke styles.",
+      approach: "Transfer learning with CNNs, OpenCV preprocessing, and structured train/val splits.",
+      outcome: "Strong accuracy on the target character set with a reproducible training recipe.",
     },
     {
       title: "Happy Us — Social Well-being Platform",
       description:
         "Designed and developed a web platform with social media integration, habit tracking, and real-time motivational content using Figma and React.",
       technologies: ["React", "Figma", "UI/UX Design", "Web Development"],
-      image: "",
+      image: PLACEHOLDER_IMG,
       link: "",
-      github: "",
+      github: GITHUB_PROFILE,
       featured: false,
+      role: "Product design and front-end development.",
     },
     {
       title: "Superstore Sales Analysis",
       description:
         "Built interactive Power BI dashboards to visualize KPIs, profitability, and customer segments, using DAX and automated refresh pipelines for near real-time analytics.",
       technologies: ["Power BI", "DAX", "Data Visualization"],
-      image: "",
+      image: PLACEHOLDER_IMG,
       link: "",
-      github: "",
+      github: GITHUB_PROFILE,
       featured: false,
+      role: "Analytics and dashboard development.",
     },
     {
       title: "Digital Diary for School",
       description:
         "Designed an intuitive online school diary interface that allows students to access homework, notices, and holidays with clear navigation and user-centered flows.",
       technologies: ["UI/UX Design", "Figma", "Web UI"],
-      image: "",
+      image: PLACEHOLDER_IMG,
       link: "",
-      github: "",
+      github: GITHUB_PROFILE,
       featured: false,
+      role: "UX and visual design.",
     },
     {
       title: "Online Travel Agency Website Design",
       description:
         "Created an inviting interface for booking flights, buses, trains, and hotels, coordinating key pages to enhance overall usability and visual design.",
       technologies: ["UI/UX Design", "Figma", "Web Design"],
-      image: "",
+      image: PLACEHOLDER_IMG,
       link: "",
-      github: "",
+      github: GITHUB_PROFILE,
       featured: false,
+      role: "UI/UX design.",
     },
   ],
 

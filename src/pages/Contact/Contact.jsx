@@ -1,11 +1,18 @@
 import { portfolioData } from '../../data/portfolioData'
+import { PageMeta } from '../../components/PageMeta/PageMeta'
+import { IconMail, IconPhone, IconMapPin } from '../../components/icons/ContactIcons'
 import './Contact.css'
 
 function Contact() {
-  const { personal } = portfolioData
+  const { personal, seo } = portfolioData
+  const defaultDesc = seo?.defaultDescription ?? ''
 
   return (
     <main className="page contact-page" id="contact" role="main">
+      <PageMeta
+        title="Contact"
+        description={`Contact ${personal.fullName} — email, phone, and social links. ${defaultDesc}`}
+      />
       <section className="contact-section" aria-labelledby="contact-heading">
         <div className="contact-header">
           <h1 id="contact-heading" className="contact-title">
@@ -26,7 +33,9 @@ function Contact() {
 
               <div className="contact-methods">
                 <div className="contact-method">
-                  <div className="contact-method-icon">✉️</div>
+                  <div className="contact-method-icon" aria-hidden="true">
+                    <IconMail />
+                  </div>
                   <div className="contact-method-content">
                     <h3 className="contact-method-label">Email</h3>
                     <a 
@@ -40,7 +49,9 @@ function Contact() {
                 </div>
 
                 <div className="contact-method">
-                  <div className="contact-method-icon">📱</div>
+                  <div className="contact-method-icon" aria-hidden="true">
+                    <IconPhone />
+                  </div>
                   <div className="contact-method-content">
                     <h3 className="contact-method-label">Phone</h3>
                     <a 
@@ -54,7 +65,9 @@ function Contact() {
                 </div>
 
                 <div className="contact-method">
-                  <div className="contact-method-icon">📍</div>
+                  <div className="contact-method-icon" aria-hidden="true">
+                    <IconMapPin />
+                  </div>
                   <div className="contact-method-content">
                     <h3 className="contact-method-label">Location</h3>
                     <p className="contact-method-value">{personal.location}</p>

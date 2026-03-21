@@ -1,101 +1,91 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 import { portfolioData } from '../../data/portfolioData'
 import Button from '../../components/Button/Button'
 import HighlightModal from '../../components/HighlightModal/HighlightModal'
+import { PageMeta } from '../../components/PageMeta/PageMeta'
+import { JsonLdPerson } from '../../components/JsonLdPerson/JsonLdPerson'
 import './Home.css'
 
-function Home({ navigate }) {
-  const { personal, projects, skills, awards } = portfolioData
+function Home() {
+  const navigate = useNavigate()
+  const { personal, projects, skills, awards, seo } = portfolioData
 
-  const featuredProjects = projects.filter((project) => project.featured).slice(0, 2)
+  const featuredProjects = projects.filter((project) => project.featured).slice(0, 3)
 
-  // Get expertise areas from domains
-  const expertiseAreas = skills.domains || []
+  const expertiseAreas = useMemo(() => skills.domains || [], [skills.domains])
 
-  // Recent highlights (from awards) - sorted chronologically (newest first)
   const recentHighlights = [...awards]
     .sort((a, b) => {
-      // Sort by date (newest first), if dates are equal, maintain original order
       if (a.date && b.date) {
-        return parseInt(b.date) - parseInt(a.date)
+        return parseInt(b.date, 10) - parseInt(a.date, 10)
       }
       if (a.date) return -1
       if (b.date) return 1
       return 0
     })
-    .slice(0, 3) // Show top 3 highlights
+    .slice(0, 3)
 
-  const profileImageRef = useRef(null)
-  const cardRefs = useRef([])
-  
-  // Refs for scroll animations
   const heroSectionRef = useRef(null)
   const caseStudiesSectionRef = useRef(null)
   const expertiseSectionRef = useRef(null)
   const highlightsSectionRef = useRef(null)
   const pillRefs = useRef([])
   const highlightItemRefs = useRef([])
-  
-  // Highlight modal state
+
   const [highlightModal, setHighlightModal] = useState({
     isOpen: false,
-    highlight: null
+    highlight: null,
   })
-  
+
   const handleHighlightClick = (highlight) => {
-    // Only open modal on mobile devices
     if (window.innerWidth <= 767) {
       setHighlightModal({
         isOpen: true,
-        highlight
+        highlight,
       })
     }
   }
-  
+
   const handleCloseHighlightModal = () => {
     setHighlightModal({
       isOpen: false,
-      highlight: null
+      highlight: null,
     })
   }
 
-  // Intersection Observer for scroll animations
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReducedMotion) return
 
     const observerOptions = {
       threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      rootMargin: '0px 0px -50px 0px',
     }
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('animate-in')
-          // Unobserve after animation to improve performance
           observer.unobserve(entry.target)
         }
       })
     }, observerOptions)
 
-    // Hero section appears immediately (no scroll animation needed)
     if (heroSectionRef.current) {
       heroSectionRef.current.classList.add('animate-in')
     }
 
-    // Observe sections (excluding hero)
     const sections = [
       caseStudiesSectionRef.current,
       expertiseSectionRef.current,
-      highlightsSectionRef.current
+      highlightsSectionRef.current,
     ].filter(Boolean)
 
     sections.forEach((section) => {
       if (section) observer.observe(section)
     })
 
-    // Observe individual items with stagger delay
     const observeItems = (items, baseDelay = 0) => {
       items.forEach((item, index) => {
         if (item) {
@@ -116,91 +106,24 @@ function Home({ navigate }) {
     }
   }, [expertiseAreas, recentHighlights])
 
-  useEffect(() => {
-    // Check if user prefers reduced motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReducedMotion) return
-
-    // Handle profile image mouse tracking
-    const profileElement = profileImageRef.current
-    if (profileElement) {
-      const handleProfileMouseMove = (e) => {
-        const rect = profileElement.getBoundingClientRect()
-        const x = e.clientX - rect.left - rect.width / 2
-        const y = e.clientY - rect.top - rect.height / 2
-        
-        const rotateX = (y / (rect.height / 2)) * -10
-        const rotateY = (x / (rect.width / 2)) * 10
-        
-        profileElement.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`
-      }
-
-      const handleProfileMouseLeave = () => {
-        profileElement.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)'
-      }
-
-      profileElement.addEventListener('mousemove', handleProfileMouseMove)
-      profileElement.addEventListener('mouseleave', handleProfileMouseLeave)
-
-      return () => {
-        profileElement.removeEventListener('mousemove', handleProfileMouseMove)
-        profileElement.removeEventListener('mouseleave', handleProfileMouseLeave)
-      }
-    }
-  }, [])
-
-  useEffect(() => {
-    // Check if user prefers reduced motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReducedMotion) return
-
-    // Handle project cards mouse tracking
-    const cleanupFunctions = cardRefs.current.map((card) => {
-      if (!card) return null
-
-      const handleCardMouseMove = (e) => {
-        const rect = card.getBoundingClientRect()
-        const x = e.clientX - rect.left - rect.width / 2
-        const y = e.clientY - rect.top - rect.height / 2
-        
-        const rotateX = (y / (rect.height / 2)) * -8
-        const rotateY = (x / (rect.width / 2)) * 8
-        
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`
-      }
-
-      const handleCardMouseLeave = () => {
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)'
-      }
-
-      card.addEventListener('mousemove', handleCardMouseMove)
-      card.addEventListener('mouseleave', handleCardMouseLeave)
-
-      return () => {
-        card.removeEventListener('mousemove', handleCardMouseMove)
-        card.removeEventListener('mouseleave', handleCardMouseLeave)
-      }
-    }).filter(Boolean)
-
-    return () => {
-      cleanupFunctions.forEach((cleanup) => cleanup())
-    }
-  }, [featuredProjects])
-
-  const handleScrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-  }
+  const defaultDesc = seo?.defaultDescription ?? ''
 
   return (
     <main className="page home-page" id="home" role="main">
-      {/* Hero / Intro Section */}
-      <section className="hero-section scroll-animate" ref={heroSectionRef} aria-labelledby="hero-heading">
+      <PageMeta
+        title="Home"
+        description={`${personal.tagline} ${personal.heroSubtitle ?? ''}`.trim() || defaultDesc}
+      />
+      <JsonLdPerson />
+
+      <section
+        className="hero-section scroll-animate"
+        ref={heroSectionRef}
+        aria-labelledby="hero-heading"
+      >
         <div className="hero-left">
-          <div className="profile-image-wrapper" ref={profileImageRef}>
-            <img 
+          <div className="profile-image-wrapper">
+            <img
               src={personal.profileImage}
               alt={`Profile picture of ${personal.fullName}`}
               className="profile-image"
@@ -211,13 +134,15 @@ function Home({ navigate }) {
                   e.target.src = fallbackImage
                 } else {
                   e.target.onerror = null
-                  e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect fill="%23333" width="400" height="400"/%3E%3Ctext fill="%23999" font-family="sans-serif" font-size="20" x="50%25" y="50%25" text-anchor="middle" dy=".3em"%3EProfile Image%3C/text%3E%3C/svg%3E'
+                  e.target.src =
+                    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect fill="%23333" width="400" height="400"/%3E%3Ctext fill="%23999" font-family="sans-serif" font-size="20" x="50%25" y="50%25" text-anchor="middle" dy=".3em"%3EProfile Image%3C/text%3E%3C/svg%3E'
                 }
               }}
             />
           </div>
           <h1 id="hero-heading" className="hero-name">
-            Howdy! I'm <span className="name-highlight">{personal.firstName}</span> {personal.lastName}
+            Howdy! I&apos;m <span className="name-highlight">{personal.firstName}</span>{' '}
+            {personal.lastName}
           </h1>
         </div>
 
@@ -228,90 +153,115 @@ function Home({ navigate }) {
               {personal.location}
             </p>
           </div>
-          <p className="hero-tagline">
-            {personal.tagline}
-          </p>
+          <p className="hero-tagline">{personal.tagline}</p>
+          {personal.heroSubtitle && (
+            <p className="hero-subtitle-secondary">{personal.heroSubtitle}</p>
+          )}
           <div className="hero-buttons" role="group" aria-label="Call to action buttons">
-            <Button 
-              type="primary" 
-              onClick={() => navigate && navigate('WORK')}
-              aria-label="Navigate to work page"
-            >
+            <Button type="primary" onClick={() => navigate('/work')} aria-label="Navigate to work page">
               View Work
             </Button>
-            <Button 
-              type="secondary" 
-              onClick={() => navigate && navigate('ABOUT')}
-              aria-label="Navigate to about page for background and resume"
-            >
+            <Button type="secondary" onClick={() => navigate('/about')} aria-label="Navigate to about page">
               About Me
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Highlighted Case Studies Section */}
       {featuredProjects.length > 0 && (
-        <section className="case-studies-section scroll-animate" ref={caseStudiesSectionRef} aria-labelledby="case-studies-heading">
-          <h2 id="case-studies-heading" className="section-heading">Featured Projects</h2>
+        <section
+          className="case-studies-section scroll-animate"
+          ref={caseStudiesSectionRef}
+          aria-labelledby="case-studies-heading"
+        >
+          <h2 id="case-studies-heading" className="section-heading">
+            Featured Projects
+          </h2>
           <div className="case-studies-grid">
-            {featuredProjects.map((project, index) => (
-              <article 
-                key={index} 
-                className="case-study-card"
-                ref={(el) => (cardRefs.current[index] = el)}
-              >
-                <h3 className="case-study-title">{project.title}</h3>
-                <p className="case-study-description">
-                  {project.homeSummary ?? project.description}
-                </p>
-                <div className="case-study-tech">
-                  {project.technologies.slice(0, 4).map((tech, techIndex) => (
-                    <span key={techIndex} className="tech-tag">{tech}</span>
-                  ))}
-                </div>
-                {(project.link || project.github) && (
-                  <div className="case-study-links">
-                    {project.link && (
-                      <a 
-                        href={project.link} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="case-study-link"
-                        aria-label={`View ${project.title} project`}
-                      >
-                        View Project →
-                      </a>
-                    )}
-                    {project.github && (
-                      <a 
-                        href={project.github} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="case-study-link"
-                        aria-label={`View ${project.title} on GitHub`}
-                      >
-                        GitHub →
-                      </a>
-                    )}
+            {featuredProjects.map((project) => {
+              const thumb = project.image || '/project-card-placeholder.svg'
+              const hasExternal = Boolean(project.link || project.github)
+              return (
+                <article key={project.title} className="case-study-card">
+                  <div className="case-study-card-thumb-wrap">
+                    <img
+                      src={thumb}
+                      alt=""
+                      className="case-study-card-thumb"
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
-                )}
-              </article>
-            ))}
+                  <h3 className="case-study-title">{project.title}</h3>
+                  <p className="case-study-description">
+                    {project.homeSummary ?? project.description}
+                  </p>
+                  <div className="case-study-tech">
+                    {project.technologies.slice(0, 4).map((tech, techIndex) => (
+                      <span key={techIndex} className="tech-tag">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="case-study-links">
+                    {hasExternal && (
+                      <>
+                        {project.link && (
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="case-study-link"
+                            aria-label={`View ${project.title} project`}
+                          >
+                            View Project →
+                          </a>
+                        )}
+                        {project.github && (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="case-study-link"
+                            aria-label={`View ${project.title} on GitHub`}
+                          >
+                            GitHub →
+                          </a>
+                        )}
+                      </>
+                    )}
+                    <Link
+                      to="/work"
+                      className="case-study-link case-study-link-internal"
+                      aria-label={`Open full case study for ${project.title} on Work page`}
+                    >
+                      Full case study →
+                    </Link>
+                  </div>
+                </article>
+              )
+            })}
           </div>
         </section>
       )}
 
-      {/* Expertise / What I Do Section */}
       {expertiseAreas.length > 0 && (
-        <section className="expertise-section scroll-animate" ref={expertiseSectionRef} aria-labelledby="expertise-heading">
-          <h2 id="expertise-heading" className="section-heading">What I Do</h2>
+        <section
+          className="expertise-section scroll-animate"
+          ref={expertiseSectionRef}
+          aria-labelledby="expertise-heading"
+        >
+          <h2 id="expertise-heading" className="section-heading">
+            What I Do
+          </h2>
           <div className="expertise-pills">
             {expertiseAreas.map((area, index) => (
-              <span 
-                key={index} 
+              <span
+                key={area}
                 className="expertise-pill scroll-animate-item"
-                ref={(el) => (pillRefs.current[index] = el)}
+                ref={(el) => {
+                  pillRefs.current[index] = el
+                }}
               >
                 {area}
               </span>
@@ -320,16 +270,23 @@ function Home({ navigate }) {
         </section>
       )}
 
-      {/* Recent Highlights Section */}
       {recentHighlights.length > 0 && (
-        <section className="highlights-section scroll-animate" ref={highlightsSectionRef} aria-labelledby="highlights-heading">
-          <h2 id="highlights-heading" className="section-heading">Recent Highlights</h2>
+        <section
+          className="highlights-section scroll-animate"
+          ref={highlightsSectionRef}
+          aria-labelledby="highlights-heading"
+        >
+          <h2 id="highlights-heading" className="section-heading">
+            Recent Highlights
+          </h2>
           <div className="highlights-grid">
             {recentHighlights.map((highlight, index) => (
-              <div 
-                key={index} 
+              <div
+                key={highlight.title}
                 className="highlight-item scroll-animate-item"
-                ref={(el) => (highlightItemRefs.current[index] = el)}
+                ref={(el) => {
+                  highlightItemRefs.current[index] = el
+                }}
                 onClick={() => handleHighlightClick(highlight)}
                 role="button"
                 tabIndex={0}
@@ -343,9 +300,7 @@ function Home({ navigate }) {
               >
                 <div className="highlight-header">
                   <h3 className="highlight-title">{highlight.title}</h3>
-                  {highlight.date && (
-                    <span className="highlight-date">{highlight.date}</span>
-                  )}
+                  {highlight.date && <span className="highlight-date">{highlight.date}</span>}
                 </div>
                 <p className="highlight-issuer">{highlight.issuer}</p>
                 {highlight.description && (
@@ -356,7 +311,7 @@ function Home({ navigate }) {
           </div>
         </section>
       )}
-      
+
       <HighlightModal
         isOpen={highlightModal.isOpen}
         onClose={handleCloseHighlightModal}

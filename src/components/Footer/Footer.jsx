@@ -1,21 +1,16 @@
+import { useNavigate } from 'react-router-dom'
 import { portfolioData } from '../../data/portfolioData'
 import './Footer.css'
 
-function Footer({ onNavigate }) {
+function Footer() {
+  const navigate = useNavigate()
   const { personal } = portfolioData
 
   const handleDownloadCV = () => {
-    // Navigate to About page
-    if (onNavigate) {
-      onNavigate('ABOUT')
-      // Small delay to ensure page has rendered, then scroll to download button
-      setTimeout(() => {
-        const downloadButton = document.querySelector('.about-intro-actions .btn')
-        if (downloadButton) {
-          downloadButton.scrollIntoView({ behavior: 'smooth', block: 'center' })
-        }
-      }, 100)
-    }
+    navigate('/about')
+    setTimeout(() => {
+      document.getElementById('resume-cta')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }, 150)
   }
 
   const displayName = `${personal.firstName} ${personal.lastName}`
@@ -26,16 +21,16 @@ function Footer({ onNavigate }) {
         <div className="footer-section">
           <h2 className="footer-heading">CONTACT</h2>
           <div className="footer-contact-info">
-            <a 
-              href={`tel:${personal.phone}`} 
+            <a
+              href={`tel:${personal.phone}`}
               className="footer-link"
               aria-label={`Call ${personal.phone}`}
             >
               {personal.phone}
             </a>
             <span className="footer-separator">|</span>
-            <a 
-              href={`mailto:${personal.email}`} 
+            <a
+              href={`mailto:${personal.email}`}
               className="footer-link"
               aria-label={`Send email to ${personal.email}`}
             >
@@ -48,9 +43,9 @@ function Footer({ onNavigate }) {
           <h2 className="footer-heading">SOCIAL</h2>
           <nav className="footer-social" aria-label="Social media links">
             {personal.linkedin && (
-              <a 
-                href={personal.linkedin} 
-                target="_blank" 
+              <a
+                href={personal.linkedin}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="footer-social-link"
                 aria-label="Visit LinkedIn profile (opens in new tab)"
@@ -59,9 +54,9 @@ function Footer({ onNavigate }) {
               </a>
             )}
             {personal.github && (
-              <a 
-                href={personal.github} 
-                target="_blank" 
+              <a
+                href={personal.github}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="footer-social-link"
                 aria-label="Visit GitHub profile (opens in new tab)"
@@ -73,10 +68,11 @@ function Footer({ onNavigate }) {
         </div>
 
         <div className="footer-download-section">
-          <button 
+          <button
+            type="button"
             className="footer-download-btn"
             onClick={handleDownloadCV}
-            aria-label="Download resume"
+            aria-label="Go to About page to download resume"
           >
             DOWNLOAD CV
           </button>
@@ -91,4 +87,3 @@ function Footer({ onNavigate }) {
 }
 
 export default Footer
-

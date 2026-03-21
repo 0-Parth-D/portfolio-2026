@@ -88,16 +88,22 @@
 }
 
 .contact-method-icon {
-  font-size: 2rem;
   width: 50px;
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(167, 209, 41, 0.1);
-  border: 1.5px solid rgba(167, 209, 41, 0.3);
+  color: var(--color-accent);
+  background: rgb(from var(--color-accent) r g b / 0.08);
+  border: 1px solid rgb(from var(--color-accent) r g b / 0.22);
   border-radius: 12px;
   flex-shrink: 0;
+}
+
+.contact-method-icon-svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  display: block;
 }
 
 .contact-method-content {
@@ -161,10 +167,11 @@
 }
 
 .social-link:hover {
-  background-color: var(--green-primary);
-  color: #000000;
+  background-color: var(--accent-violet);
+  background-image: var(--accent-gradient);
+  color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(167, 209, 41, 0.3);
+  box-shadow: 0 4px 12px rgb(from var(--color-accent) r g b / 0.3);
 }
 
 .social-link:focus-visible {

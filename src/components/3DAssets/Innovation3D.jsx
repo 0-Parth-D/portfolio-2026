@@ -1,9 +1,11 @@
-import { useRef } from 'react'
+import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { MeshDistortMaterial, OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
+import { getAccentColorHex } from '../../theme/accentColor'
 
 function Innovation3D() {
+  const accent = useMemo(() => getAccentColorHex(), [])
   const groupRef = useRef()
   const cubeRef = useRef()
 
@@ -30,15 +32,15 @@ function Innovation3D() {
       />
       <ambientLight intensity={0.6} />
       <directionalLight position={[5, 5, 5]} intensity={1.2} />
-      <pointLight position={[-5, -5, 5]} intensity={0.8} color="#A7D129" />
-      <spotLight position={[0, 5, 0]} angle={0.3} penumbra={1} intensity={1} color="#A7D129" />
+      <pointLight position={[-5, -5, 5]} intensity={0.8} color={accent} />
+      <spotLight position={[0, 5, 0]} angle={0.3} penumbra={1} intensity={1} color={accent} />
       
       <group ref={groupRef}>
         {/* Central tech cube */}
         <mesh ref={cubeRef} position={[0, 0, 0]}>
           <boxGeometry args={[2.4, 2.4, 2.4]} />
           <MeshDistortMaterial
-            color="#A7D129"
+            color={accent}
             attach="material"
             distort={0.2}
             speed={3}
@@ -61,8 +63,8 @@ function Innovation3D() {
             >
               <octahedronGeometry args={[0.4, 0]} />
               <meshStandardMaterial
-                color="#A7D129"
-                emissive="#A7D129"
+                color={accent}
+                emissive={accent}
                 emissiveIntensity={0.6}
                 metalness={0.8}
                 roughness={0.2}
@@ -93,7 +95,7 @@ function Innovation3D() {
                   itemSize={3}
                 />
               </bufferGeometry>
-              <lineBasicMaterial color="#A7D129" opacity={0.25} transparent linewidth={2} />
+              <lineBasicMaterial color={accent} opacity={0.25} transparent linewidth={2} />
             </line>
           )
         })}

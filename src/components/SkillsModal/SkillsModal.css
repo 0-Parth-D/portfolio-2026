@@ -99,7 +99,7 @@
 
 .skills-modal-close:hover {
   color: var(--green-primary);
-  background: rgba(167, 209, 41, 0.1);
+  background: rgb(from var(--color-accent) r g b / 0.1);
   transform: rotate(90deg);
 }
 
@@ -159,17 +159,17 @@
 }
 
 .skills-modal-content::-webkit-scrollbar-thumb {
-  background: rgba(167, 209, 41, 0.3);
+  background: rgb(from var(--color-accent) r g b / 0.3);
   border-radius: 4px;
 }
 
 .skills-modal-content::-webkit-scrollbar-thumb:hover {
-  background: rgba(167, 209, 41, 0.5);
+  background: rgb(from var(--color-accent) r g b / 0.5);
 }
 
 .skills-modal-content {
   scrollbar-width: thin;
-  scrollbar-color: rgba(167, 209, 41, 0.3) rgba(0, 0, 0, 0.2);
+  scrollbar-color: rgb(from var(--color-accent) r g b / 0.3) rgba(0, 0, 0, 0.2);
 }
 
 /* Mobile responsive */

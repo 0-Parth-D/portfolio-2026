@@ -67,7 +67,8 @@
 
 .menu-link.active::after {
   width: calc(100% - 1rem);
-  background-color: var(--color-accent);
+  background-color: var(--accent-violet);
+  background-image: var(--accent-gradient);
 }
 
 /* Hamburger Button */
@@ -204,7 +205,8 @@
   left: 0;
   width: 0;
   height: 2px;
-  background-color: var(--green-primary);
+  background-color: var(--accent-violet);
+  background-image: var(--accent-gradient);
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

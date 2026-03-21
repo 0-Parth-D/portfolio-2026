@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480" role="img" aria-label="Project preview placeholder">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a"/>
+      <stop offset="100%" style="stop-color:#0a0a0a"/>
+    </linearGradient>
+    <linearGradient id="accentStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed"/>
+      <stop offset="100%" style="stop-color:#e11d48"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" fill="url(#g)"/>
+  <rect x="48" y="48" width="704" height="384" fill="none" stroke="url(#accentStroke)" stroke-opacity="0.35" stroke-width="2"/>
+  <line x1="48" y1="120" x2="752" y2="120" stroke="url(#accentStroke)" stroke-opacity="0.22" stroke-width="1"/>
+  <circle cx="120" cy="84" r="8" fill="url(#accentStroke)" fill-opacity="0.55"/>
+  <rect x="160" y="76" width="200" height="16" rx="4" fill="rgba(255,255,255,0.08)"/>
+  <rect x="160" y="148" width="480" height="12" rx="3" fill="rgba(255,255,255,0.06)"/>
+  <rect x="160" y="172" width="400" height="12" rx="3" fill="rgba(255,255,255,0.05)"/>
+  <rect x="160" y="196" width="440" height="12" rx="3" fill="rgba(255,255,255,0.05)"/>
+  <rect x="160" y="280" width="120" height="36" rx="6" fill="url(#accentStroke)" fill-opacity="0.15" stroke="url(#accentStroke)" stroke-opacity="0.45" stroke-width="1"/>
+  <rect x="300" y="280" width="120" height="36" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+</svg>

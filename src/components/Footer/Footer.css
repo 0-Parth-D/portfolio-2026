@@ -1,9 +1,9 @@
 .footer {
   width: 100%;
-  min-height: 100vh;
+  min-height: auto;
   background-color: #000000;
   position: relative;
-  padding: 8rem 6rem 4rem;
+  padding: 6rem 6rem 4rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -134,8 +134,9 @@
 }
 
 .footer-download-btn:hover {
-  background-color: var(--color-accent);
-  color: var(--color-primary);
+  background-color: var(--accent-violet);
+  background-image: var(--accent-gradient);
+  color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px var(--color-accent-transparent-dark);
 }
@@ -150,9 +151,9 @@
 }
 
 .footer-name-watermark {
-  font-size: clamp(8rem, 20vw, 15rem);
+  font-size: clamp(6rem, 16vw, 11rem);
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.035);
   font-family: 'Space Grotesk', sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.1em;

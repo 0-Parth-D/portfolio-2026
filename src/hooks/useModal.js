@@ -1,71 +1,72 @@
 import { useEffect, useRef } from 'react'
 import Lenis from 'lenis'
 
+const FOCUSABLE_SELECTOR =
+  'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+
+function getFocusableElements(container) {
+  if (!container) return []
+  return Array.from(container.querySelectorAll(FOCUSABLE_SELECTOR)).filter((el) => {
+    if (el.getAttribute('aria-hidden') === 'true') return false
+    const rect = el.getBoundingClientRect()
+    return rect.width > 0 && rect.height > 0
+  })
+}
+
 /**
- * Custom hook for modal functionality with scroll lock, Lenis integration, and proper scroll restoration
+ * Modal: scroll lock, optional Lenis on content, Escape, focus trap, restore focus.
  */
 export function useModal(isOpen, onClose, contentRef) {
   const scrollPositionRef = useRef(0)
   const lenisRef = useRef(null)
 
   useEffect(() => {
-    if (!isOpen) {
-      // Cleanup when modal closes
-      if (lenisRef.current) {
-        if (lenisRef.current._rafId) {
-          cancelAnimationFrame(lenisRef.current._rafId)
-        }
-        lenisRef.current.destroy()
-        lenisRef.current = null
-      }
+    if (!isOpen) return undefined
 
-      // Restore body scroll
-      const savedScrollY = scrollPositionRef.current
-      document.body.style.position = ''
-      document.body.style.top = ''
-      document.body.style.width = ''
-      document.body.style.overflow = ''
+    const previousActiveElement =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null
 
-      // Restore scroll position - use the stored value
-      requestAnimationFrame(() => {
-        window.scrollTo({
-          top: savedScrollY,
-          behavior: 'instant'
-        })
-      })
+    scrollPositionRef.current =
+      window.scrollY || window.pageYOffset || document.documentElement.scrollTop
 
-      return
-    }
-
-    // Save scroll position before locking
-    scrollPositionRef.current = window.scrollY || window.pageYOffset || document.documentElement.scrollTop
-
-    // Lock body scroll
     document.body.style.position = 'fixed'
     document.body.style.top = `-${scrollPositionRef.current}px`
     document.body.style.width = '100%'
     document.body.style.overflow = 'hidden'
 
-    // Focus management for accessibility
-    const focusTimer = setTimeout(() => {
-      if (contentRef?.current) {
-        const firstFocusable = contentRef.current.querySelector('[tabindex="0"], button, a, input, textarea, select')
-        if (firstFocusable) {
-          firstFocusable.focus()
-        }
-      }
-    }, 100)
-
-    // Keyboard handler
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
         onClose()
+        return
+      }
+
+      if (e.key !== 'Tab' || !contentRef?.current) return
+
+      const items = getFocusableElements(contentRef.current)
+      if (items.length === 0) return
+
+      const first = items[0]
+      const last = items[items.length - 1]
+      const inside = contentRef.current.contains(document.activeElement)
+
+      if (e.shiftKey) {
+        if (!inside || document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        }
+      } else if (!inside || document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
       }
     }
 
     document.addEventListener('keydown', handleKeyDown)
 
-    // Initialize Lenis for modal content if content ref exists
+    const focusTimer = setTimeout(() => {
+      const items = getFocusableElements(contentRef?.current)
+      if (items.length > 0) items[0].focus()
+    }, 100)
+
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     let lenisInitTimer = null
     let rafId = null
@@ -74,7 +75,6 @@ export function useModal(isOpen, onClose, contentRef) {
       lenisInitTimer = setTimeout(() => {
         if (!contentRef?.current || !isOpen) return
 
-        // Create Lenis instance for modal content scrolling
         const modalLenis = new Lenis({
           duration: 1.2,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -90,9 +90,8 @@ export function useModal(isOpen, onClose, contentRef) {
 
         lenisRef.current = modalLenis
 
-        // Lenis animation frame
         function raf(time) {
-          if (lenisRef.current && isOpen) {
+          if (lenisRef.current) {
             lenisRef.current.raf(time)
             rafId = requestAnimationFrame(raf)
           }
@@ -106,8 +105,7 @@ export function useModal(isOpen, onClose, contentRef) {
     return () => {
       clearTimeout(focusTimer)
       if (lenisInitTimer) clearTimeout(lenisInitTimer)
-      
-      // Cleanup Lenis
+
       if (lenisRef.current) {
         if (lenisRef.current._rafId) {
           cancelAnimationFrame(lenisRef.current._rafId)
@@ -116,25 +114,27 @@ export function useModal(isOpen, onClose, contentRef) {
         lenisRef.current = null
       }
 
-      // Restore body scroll
-      const savedScrollY = scrollPositionRef.current
       document.body.style.position = ''
       document.body.style.top = ''
       document.body.style.width = ''
       document.body.style.overflow = ''
 
-      // Restore scroll position
       requestAnimationFrame(() => {
         window.scrollTo({
-          top: savedScrollY,
-          behavior: 'instant'
+          top: scrollPositionRef.current,
+          behavior: 'instant',
         })
       })
 
       document.removeEventListener('keydown', handleKeyDown)
+
+      if (previousActiveElement && typeof previousActiveElement.focus === 'function') {
+        try {
+          previousActiveElement.focus()
+        } catch {
+          /* ignore focus errors from detached nodes */
+        }
+      }
     }
   }, [isOpen, onClose, contentRef])
-
-  return { scrollPosition: scrollPositionRef.current }
 }
-

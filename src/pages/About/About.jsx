@@ -3,6 +3,14 @@ import { portfolioData } from '../../data/portfolioData'
 import SkillsModal from '../../components/SkillsModal/SkillsModal'
 import PortfolioModal from '../../components/PortfolioModal/PortfolioModal'
 import Button from '../../components/Button/Button'
+import { PageMeta } from '../../components/PageMeta/PageMeta'
+import {
+  IconBackground,
+  IconDrive,
+  IconVision,
+  IconInterest,
+  IconValue,
+} from '../../components/icons/AboutDecorIcons'
 import './About.css'
 
 function About() {
@@ -72,7 +80,8 @@ function About() {
     }
   }, [])
 
-  const { personal, experience, education, skills } = portfolioData
+  const { personal, experience, education, skills, seo } = portfolioData
+  const defaultDesc = seo?.defaultDescription ?? ''
   
   // Skills modal state
   const [modalState, setModalState] = useState({
@@ -137,6 +146,10 @@ function About() {
 
   return (
     <main className="page about-page" id="about" role="main">
+      <PageMeta
+        title="About"
+        description={`Background, experience, and skills — ${personal.title}. ${defaultDesc}`}
+      />
       {/* About Me Section */}
       <section className="about-me-section scroll-animate" ref={aboutMeRef} aria-labelledby="about-me-heading">
         {/* Hero Intro */}
@@ -147,12 +160,15 @@ function About() {
           <p className="about-intro-subtitle">
             {personal.tagline}
           </p>
-          <div className="about-intro-actions">
+          <p className="about-intro-lead">
+            Strongest technical signals: end-to-end ML and RAG systems, computer vision pipelines, reproducible packaging
+            (Docker, CI/CD, PyPI/Conda), plus research-grade data visualization and analytics UI from IIT Bombay and
+            internships.
+          </p>
+          <div className="about-intro-actions" id="resume-cta">
             <Button
               type="primary"
               onClick={() => {
-                // Resume file should be placed in public folder as resume.pdf
-                // Or update personal.resumeUrl in portfolioData.js with correct path
                 const resumeUrl = personal.resumeUrl || '/resume.pdf'
                 const link = document.createElement('a')
                 link.href = resumeUrl
@@ -166,20 +182,15 @@ function About() {
             >
               Download Resume
             </Button>
-            <Button
-              type="secondary"
-              onClick={() => {
-                // Open portfolio modal
-                if (personal.portfolioUrl) {
-                  setPortfolioModalOpen(true)
-                } else {
-                  console.warn('Portfolio URL not configured. Please add portfolioUrl to portfolioData.js')
-                }
-              }}
-              aria-label="View portfolio"
-            >
-              View Portfolio
-            </Button>
+            {personal.portfolioUrl ? (
+              <Button
+                type="secondary"
+                onClick={() => setPortfolioModalOpen(true)}
+                aria-label="View portfolio PDF"
+              >
+                View Portfolio
+              </Button>
+            ) : null}
           </div>
         </div>
 
@@ -201,7 +212,9 @@ function About() {
             </div>
             <div className="about-split-visual">
               <div className="split-visual-content split-visual-1">
-                <div className="visual-icon-large">🎓</div>
+                <div className="visual-icon-large" aria-hidden="true">
+                  <IconBackground />
+                </div>
                 <div className="visual-pattern"></div>
               </div>
             </div>
@@ -213,7 +226,9 @@ function About() {
           <div className="about-split-content">
             <div className="about-split-visual">
               <div className="split-visual-content split-visual-2">
-                <div className="visual-icon-large">🚀</div>
+                <div className="visual-icon-large" aria-hidden="true">
+                  <IconDrive />
+                </div>
                 <div className="visual-pattern"></div>
               </div>
             </div>
@@ -249,7 +264,9 @@ function About() {
             </div>
             <div className="about-split-visual">
               <div className="split-visual-content split-visual-3">
-                <div className="visual-icon-large">💡</div>
+                <div className="visual-icon-large" aria-hidden="true">
+                  <IconVision />
+                </div>
                 <div className="visual-pattern"></div>
               </div>
             </div>
@@ -448,6 +465,9 @@ function About() {
         <h2 id="personal-heading" className="section-heading">
           Outside of <span className="heading-highlight">Work</span>
         </h2>
+        <p className="about-personal-lead">
+          A short snapshot of research interests and values — secondary to shipping reliable models and tools.
+        </p>
         <div className="personal-content">
           {/* <div className="personal-category">
             <h3 className="personal-category-title">Hobbies & Interests</h3>
@@ -466,7 +486,9 @@ function About() {
             <div className="personal-items">
               {personalInfo.interests.map((interest, index) => (
                 <div key={index} className="personal-item">
-                  <span className="personal-icon">🔬</span>
+                  <span className="personal-icon" aria-hidden="true">
+                    <IconInterest />
+                  </span>
                   <span className="personal-text">{interest}</span>
                 </div>
               ))}
@@ -478,7 +500,9 @@ function About() {
             <div className="personal-items">
               {personalInfo.values.map((value, index) => (
                 <div key={index} className="personal-item">
-                  <span className="personal-icon">💡</span>
+                  <span className="personal-icon" aria-hidden="true">
+                    <IconValue />
+                  </span>
                   <span className="personal-text">{value}</span>
                 </div>
               ))}

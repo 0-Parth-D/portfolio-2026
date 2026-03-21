@@ -6,3 +6,13 @@
   position: relative;
   z-index: 1;
 }
+
+.page-loading {
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gray-400);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+}

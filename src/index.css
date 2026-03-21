@@ -33,17 +33,21 @@
   --color-gray-800: #2a2a2a;
   --color-gray-900: #1a1a1a;
   
-  /* Accent: Green (10%) - Use sparingly for highlights, CTAs, and important elements */
-  --color-accent: #A7D129;
-  --color-accent-light: #B8E03A;
-  --color-accent-lighter: #C9EF4B;
-  --color-accent-dark: #96C123;
-  --color-accent-darker: #85B11D;
-  --color-accent-transparent: rgba(167, 209, 41, 0.15);
-  --color-accent-transparent-light: rgba(167, 209, 41, 0.08);
-  --color-accent-transparent-dark: rgba(167, 209, 41, 0.25);
+  /* Accent: violet → red gradient. Tweak stops here; midpoint drives text, glows, rgb(from …) */
+  --accent-violet: #7c3aed;
+  --accent-red: #e11d48;
+  --accent-gradient: linear-gradient(135deg, var(--accent-violet) 0%, var(--accent-red) 100%);
+  /* Blend of the two stops — used where a single “accent color” is required */
+  --color-accent: color-mix(in srgb, var(--accent-violet) 48%, var(--accent-red) 52%);
+  --color-accent-light: color-mix(in srgb, var(--color-accent) 52%, white);
+  --color-accent-lighter: color-mix(in srgb, var(--color-accent) 36%, white);
+  --color-accent-dark: color-mix(in srgb, var(--color-accent) 78%, black);
+  --color-accent-darker: color-mix(in srgb, var(--color-accent) 62%, black);
+  --color-accent-transparent: rgb(from var(--color-accent) r g b / 0.15);
+  --color-accent-transparent-light: rgb(from var(--color-accent) r g b / 0.08);
+  --color-accent-transparent-dark: rgb(from var(--color-accent) r g b / 0.25);
   
-  /* Legacy support - map green variables to accent */
+  /* Legacy aliases (--green-* kept for existing CSS; values follow accent) */
   --green-primary: var(--color-accent);
   --green-light: var(--color-accent-light);
   --green-lighter: var(--color-accent-lighter);
@@ -142,6 +146,7 @@ body::before {
   background-repeat: repeat-x;
   pointer-events: none;
   z-index: 0;
+  opacity: 0.4;
 }
 
 #root {
@@ -207,13 +212,13 @@ body::before {
 /* Hide background lines on mobile for cleaner look */
 @media (max-width: 767px) {
   body::before {
-    opacity: 0.3;
+    opacity: 0.22;
   }
 }
 
 @media (min-width: 1920px) {
   body::before {
-    opacity: 1;
+    opacity: 0.45;
   }
 }
 
@@ -229,4 +234,25 @@ body::before {
     min-height: 44px;
     min-width: 44px;
   }
+}
+
+/* Typography rhythm — readable line length for portfolio prose */
+.page {
+  font-feature-settings: 'kern' 1, 'liga' 1;
+}
+
+.page p {
+  max-width: 65ch;
+}
+
+.page .section-heading {
+  max-width: none;
+}
+
+/* Global focus: keep outlines visible for keyboard users */
+a:focus-visible,
+button:focus-visible,
+[role='button']:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
