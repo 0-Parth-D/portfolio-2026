@@ -65,6 +65,17 @@ function Contact() {
               <nav className="contact-social" aria-label="Social media links">
                 <h3 className="contact-social-title">Connect</h3>
                 <div className="contact-social-links">
+                  {personal.website && (
+                    <a
+                      href={personal.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-link"
+                      aria-label="Visit portfolio website (opens in new tab)"
+                    >
+                      Website
+                    </a>
+                  )}
                   {personal.linkedin && (
                     <a 
                       href={personal.linkedin} 

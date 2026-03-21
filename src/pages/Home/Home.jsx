@@ -5,10 +5,9 @@ import HighlightModal from '../../components/HighlightModal/HighlightModal'
 import './Home.css'
 
 function Home({ navigate }) {
-  const { personal, projects, skills, experience, education, awards } = portfolioData
+  const { personal, projects, skills, awards } = portfolioData
 
-  // Get featured projects (3 only)
-  const featuredProjects = projects.filter(project => project.featured).slice(0, 3)
+  const featuredProjects = projects.filter((project) => project.featured).slice(0, 2)
 
   // Get expertise areas from domains
   const expertiseAreas = skills.domains || []
@@ -33,10 +32,8 @@ function Home({ navigate }) {
   const heroSectionRef = useRef(null)
   const caseStudiesSectionRef = useRef(null)
   const expertiseSectionRef = useRef(null)
-  const experienceSectionRef = useRef(null)
   const highlightsSectionRef = useRef(null)
   const pillRefs = useRef([])
-  const experienceItemRefs = useRef([])
   const highlightItemRefs = useRef([])
   
   // Highlight modal state
@@ -91,7 +88,6 @@ function Home({ navigate }) {
     const sections = [
       caseStudiesSectionRef.current,
       expertiseSectionRef.current,
-      experienceSectionRef.current,
       highlightsSectionRef.current
     ].filter(Boolean)
 
@@ -110,7 +106,6 @@ function Home({ navigate }) {
     }
 
     observeItems(pillRefs.current)
-    observeItems(experienceItemRefs.current)
     observeItems(highlightItemRefs.current, 0.2)
 
     return () => {
@@ -119,7 +114,7 @@ function Home({ navigate }) {
       })
       observer.disconnect()
     }
-  }, [expertiseAreas, experience, recentHighlights])
+  }, [expertiseAreas, recentHighlights])
 
   useEffect(() => {
     // Check if user prefers reduced motion
@@ -210,15 +205,12 @@ function Home({ navigate }) {
               alt={`Profile picture of ${personal.fullName}`}
               className="profile-image"
               onError={(e) => {
-                // Fallback to a default placeholder if the image fails to load
-                const fallbackImage = '/profile.jpg'
+                const fallbackImage = '/1720902504174.jpg'
                 const currentSrc = e.target.src
-                // Only try fallback if we haven't already tried it
-                if (!currentSrc.includes('profile.jpg') && !currentSrc.includes('placeholder')) {
+                if (!currentSrc.includes('1720902504174.jpg') && !currentSrc.includes('placeholder')) {
                   e.target.src = fallbackImage
                 } else {
-                  // If fallback also fails, use a data URI placeholder or hide
-                  e.target.onerror = null // Prevent infinite loop
+                  e.target.onerror = null
                   e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect fill="%23333" width="400" height="400"/%3E%3Ctext fill="%23999" font-family="sans-serif" font-size="20" x="50%25" y="50%25" text-anchor="middle" dy=".3em"%3EProfile Image%3C/text%3E%3C/svg%3E'
                 }
               }}
@@ -250,9 +242,9 @@ function Home({ navigate }) {
             <Button 
               type="secondary" 
               onClick={() => navigate && navigate('ABOUT')}
-              aria-label="Navigate to about section"
+              aria-label="Navigate to about page for background and resume"
             >
-              Download Resume
+              About Me
             </Button>
           </div>
         </div>
@@ -270,7 +262,9 @@ function Home({ navigate }) {
                 ref={(el) => (cardRefs.current[index] = el)}
               >
                 <h3 className="case-study-title">{project.title}</h3>
-                <p className="case-study-description">{project.description}</p>
+                <p className="case-study-description">
+                  {project.homeSummary ?? project.description}
+                </p>
                 <div className="case-study-tech">
                   {project.technologies.slice(0, 4).map((tech, techIndex) => (
                     <span key={techIndex} className="tech-tag">{tech}</span>
@@ -325,73 +319,6 @@ function Home({ navigate }) {
           </div>
         </section>
       )}
-
-      {/* Education & Work Section */}
-      <section className="experience-section scroll-animate" ref={experienceSectionRef} aria-labelledby="experience-heading">
-        <h2 id="experience-heading" className="section-heading">Background</h2>
-        <div className="experience-grid">
-          {/* Education Subsection */}
-          {education && education.length > 0 && (
-            <div className="experience-subsection">
-              <h3 className="subsection-heading">Education</h3>
-              <div className="experience-list">
-                {education.map((edu, index) => (
-                  <div 
-                    key={index} 
-                    className="experience-item scroll-animate-item"
-                    ref={(el) => (experienceItemRefs.current[index] = el)}
-                  >
-                    <h4 className="experience-title">{edu.institution}</h4>
-                    <p className="experience-role">{edu.degree} in {edu.field}</p>
-                    <p className="experience-location">{edu.location}</p>
-                    <p className="experience-dates">{edu.startDate} - {edu.endDate}</p>
-                    {edu.gpa && (
-                      <p className="experience-gpa">GPA: {edu.gpa}</p>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Divider */}
-          <div className="experience-divider"></div>
-
-          {/* Work Subsection */}
-          {experience && experience.length > 0 && (
-            <div className="experience-subsection">
-              <h3 className="subsection-heading">Work Experience</h3>
-              <div className="experience-list">
-                {experience.slice(0, 2).map((exp, index) => {
-                  // Summarize description to first 120 characters
-                  const summarizedDescription = exp.description 
-                    ? (exp.description.length > 120 
-                        ? exp.description.substring(0, 120).trim() + '...' 
-                        : exp.description)
-                    : null
-                  
-                  const itemIndex = (education?.length || 0) + index
-                  return (
-                    <div 
-                      key={index} 
-                      className="experience-item scroll-animate-item"
-                      ref={(el) => (experienceItemRefs.current[itemIndex] = el)}
-                    >
-                      <h4 className="experience-title">{exp.company}</h4>
-                      <p className="experience-role">{exp.position}</p>
-                      <p className="experience-location">{exp.location}</p>
-                      <p className="experience-dates">{exp.startDate} - {exp.endDate}</p>
-                      {summarizedDescription && (
-                        <p className="experience-description">{summarizedDescription}</p>
-                      )}
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
 
       {/* Recent Highlights Section */}
       {recentHighlights.length > 0 && (

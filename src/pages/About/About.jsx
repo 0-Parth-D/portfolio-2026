@@ -72,7 +72,7 @@ function About() {
     }
   }, [])
 
-  const { personal, experience, education, skills, projects } = portfolioData
+  const { personal, experience, education, skills } = portfolioData
   
   // Skills modal state
   const [modalState, setModalState] = useState({
@@ -145,8 +145,7 @@ function About() {
             About <span className="heading-highlight">Me</span>
           </h1>
           <p className="about-intro-subtitle">
-            Building scalable systems and intuitive data-driven experiences at the intersection of 
-            software engineering, data science, and human-computer interaction.
+            {personal.tagline}
           </p>
           <div className="about-intro-actions">
             <Button
@@ -157,7 +156,7 @@ function About() {
                 const resumeUrl = personal.resumeUrl || '/resume.pdf'
                 const link = document.createElement('a')
                 link.href = resumeUrl
-                link.download = 'Parth_Deshmukh_Resume_SWE.pdf'
+                link.download = 'Parth_Deshmukh_Resume_DS.pdf'
                 link.target = '_blank'
                 document.body.appendChild(link)
                 link.click()
@@ -192,11 +191,12 @@ function About() {
               <h2 className="about-split-title">Background</h2>
               <div className="about-split-divider"></div>
               <p className="about-split-text">
-                Graduate Computer Science student at Texas A&M University. Building scalable systems and 
-                data-driven experiences combining software engineering, data science, and HCI.
+                M.S. Computer Science at Texas A&M (expected May 2027), focused on AI, algorithms, and data mining.
+                B.Tech in Information Technology from VIIT, Pune (May 2024), GPA 9.12/10.00.
               </p>
               <p className="about-split-text-secondary">
-                B.Tech from VIIT (GPA: 9.12/10). Led UI/UX team. Published research with Springer and IEEE.
+                Research intern at IIT Bombay on analytics dashboards and reporting tooling; UI/UX intern at HTS Tech
+                Solutions. Publications with Springer and IEEE; led the UI/UX team at OIR, VIIT.
               </p>
             </div>
             <div className="about-split-visual">

@@ -116,9 +116,9 @@ function Work() {
             <span className="highlight">Work</span>
           </h1>
           <p className="work-overview-subtitle">
-            I approach every project with a user-centered mindset, combining technical expertise with design thinking 
-            to solve complex problems. My work spans software engineering, data science, and human-computer interaction, 
-            where I focus on building scalable systems and intuitive experiences that make a meaningful impact.
+            Recent work spans satellite image segmentation with SAM3, a LangChain and ChromaDB RAG assistant over
+            large documentation sets, and production-minded packaging with Docker and CI/CD — alongside earlier
+            data-visualization and analytics UI experience from research and internships.
           </p>
         </div>
 
