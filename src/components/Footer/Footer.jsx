@@ -1,17 +1,10 @@
-import { useNavigate } from 'react-router-dom'
 import { portfolioData } from '../../data/portfolioData'
+import { downloadResume, useResumeAvailable } from '../../utils/resume'
 import './Footer.css'
 
 function Footer() {
-  const navigate = useNavigate()
   const { personal } = portfolioData
-
-  const handleDownloadCV = () => {
-    navigate('/about')
-    setTimeout(() => {
-      document.getElementById('resume-cta')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    }, 150)
-  }
+  const resumeAvailable = useResumeAvailable()
 
   const displayName = `${personal.firstName} ${personal.lastName}`
 
@@ -67,16 +60,18 @@ function Footer() {
           </nav>
         </div>
 
-        <div className="footer-download-section">
-          <button
-            type="button"
-            className="footer-download-btn"
-            onClick={handleDownloadCV}
-            aria-label="Go to About page to download resume"
-          >
-            DOWNLOAD CV
-          </button>
-        </div>
+        {resumeAvailable ? (
+          <div className="footer-download-section">
+            <button
+              type="button"
+              className="footer-download-btn"
+              onClick={downloadResume}
+              aria-label="Download resume"
+            >
+              DOWNLOAD CV
+            </button>
+          </div>
+        ) : null}
       </div>
 
       <div className="footer-watermark">

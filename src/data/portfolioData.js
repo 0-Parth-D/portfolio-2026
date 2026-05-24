@@ -28,7 +28,6 @@ export const portfolioData = {
     github: "https://github.com/0-Parth-D",
     website: "https://parthdeshmukh.vercel.app",
     profileImage: "/1720902504174.jpg",
-    resumeUrl: "/resume.pdf",
     /** Set to a path under public/ or a Drive URL when you have a PDF; empty hides "View Portfolio" on About */
     portfolioUrl: "",
   },

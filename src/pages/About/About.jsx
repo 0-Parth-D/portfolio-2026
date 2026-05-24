@@ -4,6 +4,7 @@ import SkillsModal from '../../components/SkillsModal/SkillsModal'
 import PortfolioModal from '../../components/PortfolioModal/PortfolioModal'
 import Button from '../../components/Button/Button'
 import { PageMeta } from '../../components/PageMeta/PageMeta'
+import { downloadResume, useResumeAvailable } from '../../utils/resume'
 import {
   IconBackground,
   IconDrive,
@@ -82,6 +83,7 @@ function About() {
 
   const { personal, experience, education, skills, seo } = portfolioData
   const defaultDesc = seo?.defaultDescription ?? ''
+  const resumeAvailable = useResumeAvailable()
   
   // Skills modal state
   const [modalState, setModalState] = useState({
@@ -166,22 +168,15 @@ function About() {
             internships.
           </p>
           <div className="about-intro-actions" id="resume-cta">
-            <Button
-              type="primary"
-              onClick={() => {
-                const resumeUrl = personal.resumeUrl || '/resume.pdf'
-                const link = document.createElement('a')
-                link.href = resumeUrl
-                link.download = 'Parth_Deshmukh_Resume_DS.pdf'
-                link.target = '_blank'
-                document.body.appendChild(link)
-                link.click()
-                document.body.removeChild(link)
-              }}
-              aria-label="Download resume"
-            >
-              Download Resume
-            </Button>
+            {resumeAvailable ? (
+              <Button
+                type="primary"
+                onClick={downloadResume}
+                aria-label="Download resume"
+              >
+                Download Resume
+              </Button>
+            ) : null}
             {personal.portfolioUrl ? (
               <Button
                 type="secondary"
