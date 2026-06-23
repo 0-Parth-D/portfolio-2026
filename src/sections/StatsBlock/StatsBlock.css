@@ -1,0 +1,168 @@
+.stats-block__heading {
+  margin-bottom: 20px;
+}
+
+.stats-block__headline {
+  line-height: 0.95;
+  margin-bottom: 20px;
+}
+
+.section--preview .stats-block__headline {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+}
+
+.stats-block__line {
+  display: block;
+}
+
+.stats-block__line--dim {
+  color: var(--color-cream-20);
+}
+
+.stats-block__accent {
+  color: var(--color-accent);
+  font-size: 1.1em;
+}
+
+.stats-block__metrics {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--color-cream-60);
+  max-width: 520px;
+  line-height: 1.6;
+}
+
+.stats-block__metrics--preview {
+  margin-bottom: 8px;
+}
+
+.stats-block__subheading {
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-cream-20);
+  margin-bottom: 20px;
+}
+
+.stats-block__experience,
+.stats-block__process {
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--color-cream-10);
+}
+
+.stats-block__jobs {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.stats-block__job {
+  max-width: 720px;
+}
+
+.stats-block__job-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.stats-block__job-company {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-cream);
+}
+
+.stats-block__job-dates {
+  font-size: 0.625rem;
+  color: var(--color-cream-20);
+}
+
+.stats-block__job-role {
+  font-size: 0.8125rem;
+  color: var(--color-accent);
+  margin-bottom: 4px;
+}
+
+.stats-block__job-location {
+  font-size: 0.625rem;
+  color: var(--color-cream-20);
+  margin-bottom: 10px;
+}
+
+.stats-block__job-desc {
+  font-size: 0.875rem;
+  color: var(--color-cream-60);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.stats-block__job-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.stats-block__tech {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  color: var(--color-cream-20);
+  border: 1px solid var(--color-cream-10);
+  border-radius: 3px;
+  padding: 2px 7px;
+}
+
+.stats-block__process-text {
+  font-size: 0.9375rem;
+  color: var(--color-cream-60);
+  line-height: 1.7;
+  max-width: 640px;
+  margin-bottom: 20px;
+}
+
+.stats-block__specialties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.stats-block__specialty {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-cream);
+  border: 1px solid var(--color-cream-20);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+.stats-block__skill-matrix {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.stats-block__skill-label {
+  display: block;
+  font-size: 0.5625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-cream-20);
+  margin-bottom: 8px;
+}
+
+.stats-block__skill-list {
+  font-size: 0.8125rem;
+  color: var(--color-cream-60);
+  line-height: 1.6;
+}
+
+@media (max-width: 809px) {
+  .stats-block__skill-matrix {
+    grid-template-columns: 1fr;
+  }
+}

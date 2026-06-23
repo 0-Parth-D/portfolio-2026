@@ -1,0 +1,44 @@
+/* Font imports must precede all other rules */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=switzer@400,500,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+/* Display type: original design specified Dharma Gothic M Heavy (commercial).
+   Substitute: Bebas Neue — condensed, ultra-bold display face via Google Fonts. */
+.display-text {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(72px, 13vw, 192px);
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: var(--color-cream);
+}
+
+.display-text--sm {
+  font-size: clamp(36px, 6vw, 80px);
+  line-height: 1;
+}
+
+.script-accent {
+  font-family: var(--font-script);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.72em;
+  color: var(--color-accent);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.body-text {
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: var(--color-cream);
+}
+
+.mono-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}

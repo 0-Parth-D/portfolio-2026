@@ -1,0 +1,54 @@
+:root {
+  /* Colors */
+  --color-bg: #121110;
+  --color-surface: #1a1917;
+  --color-cream: #fff6e9;
+  --color-cream-60: rgba(255, 246, 233, 0.6);
+  --color-cream-20: rgba(255, 246, 233, 0.2);
+  --color-cream-10: rgba(255, 246, 233, 0.1);
+  --color-accent: #db1f18;
+  --color-accent-tint: rgba(219, 31, 24, 0.2);
+  --color-accent-glow: rgba(219, 31, 24, 0.15);
+  --color-selection: #ff6200;
+  --color-off-white: #fffaf0;
+
+  /* Typography families (set in typography.css) */
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Switzer', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-script: 'Great Vibes', cursive;
+  --font-mono: 'Switzer', ui-monospace, monospace;
+
+  /* Spacing */
+  --section-padding: 120px;
+  --section-padding-mobile: 72px;
+  --container-max: 1200px;
+  --container-gutter: 72px;
+  --container-gutter-mobile: 20px;
+  --card-gap: 24px;
+  --nav-padding-y: 20px;
+  --component-gap: 16px;
+  --gap-tight: 8px;
+
+  /* Breakpoints (for reference in JS) */
+  --bp-mobile: 810px;
+  --bp-tablet: 1199px;
+  --bp-desktop: 1200px;
+
+  /* Transitions */
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-card: 400ms var(--ease-spring);
+  --transition-image: 600ms var(--ease-spring);
+
+  /* Layering */
+  --z-nav: 100;
+  --z-skip-link: 1000;
+  --z-modal: 10000;
+  --z-cursor: 10001;
+}
+
+@media (max-width: 809px) {
+  :root {
+    --section-padding: var(--section-padding-mobile);
+    --container-gutter: var(--container-gutter-mobile);
+  }
+}

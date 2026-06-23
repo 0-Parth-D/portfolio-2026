@@ -1,30 +1,26 @@
 import { Helmet } from 'react-helmet-async'
-import { useLocation } from 'react-router-dom'
 import { portfolioData } from '../../data/portfolioData'
 
 const { siteName, defaultDescription } = portfolioData.seo
+const { personal } = portfolioData
 
-/**
- * Per-route title, description, canonical, Open Graph, and Twitter cards.
- */
-export function PageMeta({ title, description }) {
-  const { pathname } = useLocation()
+export function PageMeta({ title, description, path = '/' }) {
   const origin = typeof window !== 'undefined' ? window.location.origin : ''
-  const pageTitle = title ? `${title} · ${siteName}` : `${siteName} · ML & Software Portfolio`
-  const desc = description || defaultDescription
-  const url = `${origin}${pathname}`
+  const pageTitle = title ?? `${personal.displayName} · ${personal.title}`
+  const metaDescription = description ?? defaultDescription
+  const url = `${origin}${path}`
   const imageUrl = `${origin}/og-image.png`
 
   return (
     <Helmet prioritizeSeoTags>
       <title>{pageTitle}</title>
-      <meta name="description" content={desc} />
+      <meta name="description" content={metaDescription} />
       <link rel="canonical" href={url} />
 
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={siteName} />
       <meta property="og:title" content={pageTitle} />
-      <meta property="og:description" content={desc} />
+      <meta property="og:description" content={metaDescription} />
       <meta property="og:url" content={url} />
       <meta property="og:image" content={imageUrl} />
       <meta property="og:image:width" content="1200" />
@@ -33,7 +29,7 @@ export function PageMeta({ title, description }) {
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={pageTitle} />
-      <meta name="twitter:description" content={desc} />
+      <meta name="twitter:description" content={metaDescription} />
       <meta name="twitter:image" content={imageUrl} />
     </Helmet>
   )

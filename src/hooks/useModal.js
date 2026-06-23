@@ -16,7 +16,7 @@ function getFocusableElements(container) {
 /**
  * Modal: scroll lock, optional Lenis on content, Escape, focus trap, restore focus.
  */
-export function useModal(isOpen, onClose, contentRef) {
+export function useModal(isOpen, onClose, contentRef, scrollRef) {
   const scrollPositionRef = useRef(0)
   const lenisRef = useRef(null)
 
@@ -73,7 +73,8 @@ export function useModal(isOpen, onClose, contentRef) {
 
     if (!prefersReducedMotion) {
       lenisInitTimer = setTimeout(() => {
-        if (!contentRef?.current || !isOpen) return
+        const scrollContainer = scrollRef?.current ?? contentRef?.current
+        if (!scrollContainer || !isOpen) return
 
         const modalLenis = new Lenis({
           duration: 1.2,
@@ -84,8 +85,8 @@ export function useModal(isOpen, onClose, contentRef) {
           wheelMultiplier: 1,
           touchMultiplier: 2,
           infinite: false,
-          wrapper: contentRef.current,
-          content: contentRef.current,
+          wrapper: scrollContainer,
+          content: scrollContainer,
         })
 
         lenisRef.current = modalLenis
@@ -136,5 +137,5 @@ export function useModal(isOpen, onClose, contentRef) {
         }
       }
     }
-  }, [isOpen, onClose, contentRef])
+  }, [isOpen, onClose, contentRef, scrollRef])
 }

@@ -1,1 +1,0 @@
-import{j as t}from"./index-Ck9I2a_q.js";function m({children:n,type:s="primary",onClick:a,className:r="",...e}){return t.jsxs("button",{className:`btn btn-${s} ${r}`,onClick:a,...e,children:[t.jsx("span",{className:"btn-content",children:n}),t.jsx("span",{className:"btn-glint"})]})}export{m as B};

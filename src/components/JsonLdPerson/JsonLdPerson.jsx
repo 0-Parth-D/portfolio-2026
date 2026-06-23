@@ -10,7 +10,7 @@ export function JsonLdPerson() {
     url: personal.website,
     jobTitle: personal.title,
     email: personal.email,
-    sameAs: [personal.linkedin, personal.github].filter(Boolean),
+    sameAs: [personal.linkedin, personal.github, personal.huggingface].filter(Boolean),
     address: {
       '@type': 'PostalAddress',
       addressLocality: personal.location,

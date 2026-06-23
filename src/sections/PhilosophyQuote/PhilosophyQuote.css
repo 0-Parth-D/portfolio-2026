@@ -1,0 +1,30 @@
+.philosophy-quote {
+  background: var(--color-surface);
+}
+
+.philosophy-quote__label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-accent);
+  margin-bottom: 24px;
+}
+
+.philosophy-quote__label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-cream-20);
+}
+
+.philosophy-quote__text {
+  line-height: 1.1;
+}
+
+.philosophy-quote__line {
+  display: block;
+}
+
+.philosophy-quote__line .script-accent {
+  font-size: 0.75em;
+}

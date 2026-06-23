@@ -1,14 +1,12 @@
 import { lazy, Suspense } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import Menu from './components/Menu/Menu'
-import Footer from './components/Footer/Footer'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import { LenisContext } from './context/LenisContext'
+import { useLenis } from './hooks/useLenis'
 import './App.css'
 
-const Home = lazy(() => import('./pages/Home/Home'))
-const Work = lazy(() => import('./pages/Work/Work'))
-const About = lazy(() => import('./pages/About/About'))
-const Contact = lazy(() => import('./pages/Contact/Contact'))
-
+const Landing = lazy(() => import('./pages/Landing/Landing'))
+const AboutPage = lazy(() => import('./pages/About/AboutPage'))
+const WorkPage = lazy(() => import('./pages/Work/WorkPage'))
 function PageFallback() {
   return (
     <div className="page-loading" role="status" aria-live="polite">
@@ -18,21 +16,22 @@ function PageFallback() {
 }
 
 function App() {
+  const lenisRef = useLenis()
+
   return (
-    <div className="app">
-      <Menu />
-      <div id="main-content">
+    <LenisContext.Provider value={lenisRef}>
+      <div className="app">
         <Suspense fallback={<PageFallback />}>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/work" element={<Work />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/" element={<Landing />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/work" element={<WorkPage />} />
+            <Route path="/projects" element={<Navigate to="/work" replace />} />
+            <Route path="*" element={<Landing />} />
           </Routes>
         </Suspense>
       </div>
-      <Footer />
-    </div>
+    </LenisContext.Provider>
   )
 }
 

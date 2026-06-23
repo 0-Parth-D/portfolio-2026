@@ -1,0 +1,98 @@
+.projects-grid__heading {
+  margin-bottom: 12px;
+}
+
+.projects-grid__subtext {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--color-cream-60);
+  max-width: 520px;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.projects-grid__subtext--wide {
+  max-width: 640px;
+}
+
+.section--preview .projects-grid__subtext {
+  margin-bottom: 24px;
+}
+
+/* Default 2-col fallback (unused when bento active) */
+.projects-grid__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--card-gap);
+}
+
+/* Bento grid — staggered masonry-like layout */
+.projects-grid__grid--bento {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  /* Fixed row tracks so row spans produce real height differences */
+  grid-auto-rows: clamp(180px, 14vw, 220px);
+  gap: var(--card-gap);
+  align-items: stretch;
+}
+
+.projects-grid__grid--preview {
+  grid-auto-rows: clamp(220px, 16vw, 260px);
+}
+
+.projects-grid__grid--full {
+  grid-auto-rows: clamp(200px, 15vw, 260px);
+}
+
+.projects-grid__item--placed {
+  grid-column: var(--bento-col);
+  grid-row: var(--bento-row);
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  align-self: stretch;
+  height: 100%;
+}
+
+.projects-grid__item--placed > * {
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Tablet — simplified 6-column bento */
+@media (min-width: 810px) and (max-width: 1199px) {
+  .projects-grid__grid--bento {
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: clamp(160px, 13vw, 200px);
+  }
+
+  .projects-grid__grid--preview {
+    grid-auto-rows: clamp(150px, 12vw, 190px);
+  }
+
+  .projects-grid__grid--full {
+    grid-auto-rows: clamp(170px, 14vw, 220px);
+  }
+
+  .projects-grid__item--placed {
+    grid-column: var(--bento-col-tablet, var(--bento-col));
+    grid-row: var(--bento-row-tablet, var(--bento-row));
+  }
+}
+
+/* Mobile — single column stack */
+@media (max-width: 809px) {
+  .projects-grid__grid,
+  .projects-grid__grid--bento {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+  }
+
+  .projects-grid__item--placed {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+  }
+}

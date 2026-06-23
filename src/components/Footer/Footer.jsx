@@ -1,81 +1,49 @@
 import { portfolioData } from '../../data/portfolioData'
-import { downloadResume, useResumeAvailable } from '../../utils/resume'
 import './Footer.css'
 
 function Footer() {
   const { personal } = portfolioData
-  const resumeAvailable = useResumeAvailable()
 
-  const displayName = `${personal.firstName} ${personal.lastName}`
+  const socialLinks = [
+    { label: 'github', href: personal.github },
+    { label: 'huggingface', href: personal.huggingface },
+    { label: 'linkedin', href: personal.linkedin },
+  ]
 
   return (
-    <footer className="footer" role="contentinfo">
-      <div className="footer-content">
-        <div className="footer-section">
-          <h2 className="footer-heading">CONTACT</h2>
-          <div className="footer-contact-info">
-            <a
-              href={`tel:${personal.phone}`}
-              className="footer-link"
-              aria-label={`Call ${personal.phone}`}
-            >
-              {personal.phone}
-            </a>
-            <span className="footer-separator">|</span>
-            <a
-              href={`mailto:${personal.email}`}
-              className="footer-link"
-              aria-label={`Send email to ${personal.email}`}
-            >
-              {personal.email}
-            </a>
-          </div>
+    <footer id="contact" className="site-footer" aria-labelledby="footer-heading">
+      <div className="container site-footer__inner">
+        <h2 id="footer-heading" className="sr-only">
+          Contact
+        </h2>
+        <div className="site-footer__name display-text display-text--sm">
+          <span>PARTH</span>
+          <span>DESHMUKH</span>
         </div>
-
-        <div className="footer-section">
-          <h2 className="footer-heading">SOCIAL</h2>
-          <nav className="footer-social" aria-label="Social media links">
-            {personal.linkedin && (
+        <div className="site-footer__contact">
+          <p className="site-footer__label mono-text">Get in touch</p>
+          <nav className="site-footer__links" aria-label="Social links">
+            {socialLinks.map((link) => (
               <a
-                href={personal.linkedin}
+                key={link.label}
+                href={link.href}
+                className="site-footer__link"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="footer-social-link"
-                aria-label="Visit LinkedIn profile (opens in new tab)"
               >
-                LINKEDIN
+                {link.label}
               </a>
-            )}
-            {personal.github && (
-              <a
-                href={personal.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-social-link"
-                aria-label="Visit GitHub profile (opens in new tab)"
-              >
-                GITHUB
-              </a>
-            )}
+            ))}
           </nav>
+          <a
+            href={`mailto:${personal.email}`}
+            className="site-footer__cta"
+            aria-label={`Mail me at ${personal.email}`}
+          >
+            mail me
+          </a>
+          <p className="site-footer__email mono-text">{personal.email}</p>
         </div>
-
-        {resumeAvailable ? (
-          <div className="footer-download-section">
-            <button
-              type="button"
-              className="footer-download-btn"
-              onClick={downloadResume}
-              aria-label="Download resume"
-            >
-              DOWNLOAD CV
-            </button>
-          </div>
-        ) : null}
-      </div>
-
-      <div className="footer-watermark">
-        <span className="footer-name-watermark">{displayName.toUpperCase()}</span>
       </div>
     </footer>
   )
