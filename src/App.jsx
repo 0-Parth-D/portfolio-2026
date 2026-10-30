@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import { LenisContext } from './context/LenisContext'
 import { useLenis } from './hooks/useLenis'
 import './App.css'
@@ -40,6 +41,7 @@ function App() {
         <Suspense fallback={null}>
           <CustomCursor />
         </Suspense>
+        <Analytics />
       </div>
     </LenisContext.Provider>
   )
