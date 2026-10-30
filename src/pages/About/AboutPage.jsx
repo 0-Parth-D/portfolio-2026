@@ -7,13 +7,13 @@ import { portfolioData } from '../../data/portfolioData'
 import './AboutPage.css'
 
 function AboutPage() {
-  const { personal, about } = portfolioData
+  const { about } = portfolioData
 
   return (
     <PageLayout>
       <PageMeta
-        title={`About · ${personal.displayName}`}
-        description="Education, skills, certifications, and the story behind how I build ML systems."
+        title={`About · ${portfolioData.seo.siteName}`}
+        description="Education, skills, publications, and the story behind how I build backend and AI systems."
         path="/about"
       />
       <JsonLdPerson />

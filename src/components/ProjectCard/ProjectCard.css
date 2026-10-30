@@ -8,9 +8,17 @@
   will-change: transform;
 }
 
-.project-card:hover {
+.project-card:hover,
+.project-card:focus-visible {
   transform: scale(1.02);
   border-color: var(--color-cream-20);
+}
+
+.project-card--link {
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
 }
 
 .project-card--featured {
@@ -36,7 +44,8 @@
 .project-card__image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 6% 7%;
   transition: transform var(--transition-image);
   will-change: transform;
 }
@@ -75,7 +84,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-cream-20);
+  color: var(--color-cream-muted);
 }
 
 .project-card__arrow {
@@ -115,7 +124,7 @@
 .project-card__tag {
   font-family: var(--font-mono);
   font-size: 0.5625rem;
-  color: var(--color-cream-20);
+  color: var(--color-cream-muted);
   border: 1px solid var(--color-cream-10);
   border-radius: 3px;
   padding: 2px 7px;
@@ -214,6 +223,22 @@
 
 .project-card--compact .project-card__tags {
   gap: 4px;
+}
+
+/* Text-only cards (publications) — no thumbnail, body fills the cell */
+.project-card--text {
+  justify-content: flex-end;
+  background:
+    radial-gradient(120% 140% at 100% 0%, var(--color-accent-glow), transparent 55%),
+    var(--color-surface);
+}
+
+.project-card--text .project-card__category {
+  color: var(--color-cream-60);
+}
+
+.project-card--text .project-card__title {
+  font-size: 1rem;
 }
 
 /* Preview bento — slightly tighter typography */

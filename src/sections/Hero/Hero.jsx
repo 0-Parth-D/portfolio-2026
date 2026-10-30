@@ -1,9 +1,11 @@
 import { portfolioData } from '../../data/portfolioData'
 import { MotionReveal, MotionItem } from '../../components/MotionReveal/MotionReveal'
+import ResumeMenu from '../../components/ResumeMenu/ResumeMenu'
+import NowLine from '../../components/NowLine/NowLine'
 import './Hero.css'
 
 function Hero() {
-  const { hero } = portfolioData
+  const { hero, personal } = portfolioData
 
   return (
     <section className="hero section" aria-labelledby="hero-heading">
@@ -17,7 +19,7 @@ function Hero() {
             ))}
           </MotionItem>
 
-          <h1 id="hero-heading" className="hero__headline display-text">
+          <p className="hero__headline display-text">
             {hero.lines.map((line, lineIndex) => (
               <span key={lineIndex} className="hero__line">
                 {line.parts.map((part, partIndex) => (
@@ -34,15 +36,41 @@ function Hero() {
                     {part.text}
                   </span>
                 ))}
+                {lineIndex === hero.lines.length - 1 && (
+                  <>
+                    {' '}
+                    <span className="script-accent">{hero.accent}</span>
+                  </>
+                )}
               </span>
             ))}
-            <span className="hero__line">
-              <span className="script-accent">{hero.accent}</span>
-            </span>
-          </h1>
+          </p>
 
-          <MotionItem>
-            <p className="hero__subtext">{hero.subtext}</p>
+          <MotionItem className="hero__intro">
+            <div className="hero__identity">
+              <h1 id="hero-heading" className="hero__name">
+                {hero.intro.name}
+                <span className="hero__role">{hero.intro.role}</span>
+              </h1>
+              <p className="hero__meta mono-text">{hero.intro.meta}</p>
+              <p className="hero__subtext">{hero.subtext}</p>
+              <NowLine className="hero__now" />
+            </div>
+
+            <div className="hero__ctas">
+              <ResumeMenu variant="hero" />
+              <a
+                href={personal.github}
+                className="hero__cta hero__cta--outline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub ↗
+              </a>
+              <a href={`mailto:${personal.email}`} className="hero__cta hero__cta--text">
+                Email me
+              </a>
+            </div>
           </MotionItem>
         </MotionReveal>
       </div>

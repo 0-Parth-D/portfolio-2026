@@ -29,7 +29,7 @@
 }
 
 .about-blurb__tagline {
-  color: var(--color-cream-20);
+  color: var(--color-cream-muted);
   font-size: 0.6875rem;
 }
 
@@ -80,7 +80,7 @@
 .about-blurb__edu-meta {
   width: 100%;
   font-size: 0.625rem;
-  color: var(--color-cream-20);
+  color: var(--color-cream-muted);
 }
 
 .about-blurb__edu-gpa {
@@ -131,7 +131,7 @@
   font-size: 0.625rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-cream-20);
+  color: var(--color-cream-muted);
   margin-bottom: 12px;
 }
 
@@ -170,11 +170,30 @@
   color: var(--color-cream);
 }
 
+.about-blurb__now {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-cream-10);
+}
+
+.about-blurb__award-link {
+  flex: 1 1 240px;
+  text-decoration: underline;
+  text-decoration-color: var(--color-cream-20);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.about-blurb__award-link:hover,
+.about-blurb__award-link:focus-visible {
+  text-decoration-color: var(--color-accent);
+}
+
 .about-blurb__job-dates,
 .about-blurb__award-date,
 .about-blurb__cert-date {
   font-size: 0.625rem;
-  color: var(--color-cream-20);
+  color: var(--color-cream-muted);
 }
 
 .about-blurb__job-role,

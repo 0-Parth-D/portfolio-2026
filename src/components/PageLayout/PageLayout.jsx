@@ -1,10 +1,7 @@
-import { lazy, Suspense } from 'react'
 import SkipLink from '../SkipLink/SkipLink'
 import StickyNav from '../StickyNav/StickyNav'
 import Footer from '../Footer/Footer'
 import ScrollToTop from '../ScrollToTop/ScrollToTop'
-
-const CustomCursor = lazy(() => import('../CustomCursor/CustomCursor'))
 
 function PageLayout({ children }) {
   return (
@@ -14,9 +11,6 @@ function PageLayout({ children }) {
       <StickyNav />
       {children}
       <Footer />
-      <Suspense fallback={null}>
-        <CustomCursor />
-      </Suspense>
     </>
   )
 }

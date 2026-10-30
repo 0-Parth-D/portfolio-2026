@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+  <title>ROUGE-L and BERTScore before and after fine-tuning</title>
+  <text x="40" y="50" fill="#fff6e9" font-size="15" font-weight="700" letter-spacing="2.5">BASE VS QLORA FINE-TUNE</text>
+  <text x="40" y="76" fill="#fff6e9" fill-opacity="0.55" font-size="14">LLaMA 3.2 3B &#183; CodeAlpaca-20k &#183; 200 held-out samples</text>
+
+  <g font-size="14" text-anchor="end" fill="#fff6e9">
+    <text x="170" y="150" font-weight="700">ROUGE-L</text>
+    <text x="170" y="290" font-weight="700">BERTScore F1</text>
+  </g>
+
+  <line x1="190" y1="110" x2="190" y2="350" stroke="#fff6e9" stroke-opacity="0.15"/>
+
+  <rect x="190" y="118" width="181.7" height="26" rx="3" fill="#fff6e9" fill-opacity="0.25"/>
+  <rect x="190" y="152" width="300.2" height="26" rx="3" fill="#db1f18"/>
+  <rect x="190" y="258" width="430.9" height="26" rx="3" fill="#fff6e9" fill-opacity="0.25"/>
+  <rect x="190" y="292" width="487.1" height="26" rx="3" fill="#db1f18"/>
+
+  <g font-size="13">
+    <text x="382" y="136" fill="#fff6e9" fill-opacity="0.7">0.330</text>
+    <text x="500" y="170" fill="#fff6e9" font-weight="700">0.546</text>
+    <text x="608" y="276" fill="#fff6e9" fill-opacity="0.8" text-anchor="end">0.784</text>
+    <text x="664" y="310" fill="#fff6e9" font-weight="700" text-anchor="end">0.886</text>
+  </g>
+
+  <g font-weight="700" fill="#db1f18" text-anchor="end">
+    <text x="760" y="172" font-size="32">+65%</text>
+    <text x="760" y="314" font-size="24">+13%</text>
+  </g>
+
+  <g font-size="12" fill="#fff6e9" fill-opacity="0.45">
+    <rect x="40" y="378" width="14" height="10" rx="2" fill="#fff6e9" fill-opacity="0.25"/>
+    <text x="62" y="387">Base model</text>
+    <rect x="160" y="378" width="14" height="10" rx="2" fill="#db1f18"/>
+    <text x="182" y="387">4-bit QLoRA, ~1% of parameters trained</text>
+  </g>
+</svg>

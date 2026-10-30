@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+  <title>Multi-agent research workflow</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#fff6e9" fill-opacity="0.55"/>
+    </marker>
+    <marker id="arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#db1f18"/>
+    </marker>
+  </defs>
+
+  <text x="40" y="46" fill="#fff6e9" font-size="14" font-weight="700" letter-spacing="2.5">LANGGRAPH RESEARCH WORKFLOW</text>
+
+  <g fill="none" stroke="#fff6e9" stroke-opacity="0.3" stroke-width="1.2">
+    <rect x="40" y="250" width="200" height="64" rx="6"/>
+    <rect x="40" y="140" width="110" height="56" rx="28"/>
+    <rect x="650" y="140" width="110" height="56" rx="28"/>
+  </g>
+  <g fill="#db1f18" fill-opacity="0.1" stroke="#db1f18" stroke-width="1.4">
+    <rect x="200" y="132" width="120" height="72" rx="8"/>
+    <rect x="360" y="132" width="120" height="72" rx="8"/>
+    <rect x="500" y="132" width="120" height="72" rx="8"/>
+  </g>
+
+  <g fill="#fff6e9" font-size="13" font-weight="700" letter-spacing="1.2" text-anchor="middle">
+    <text x="95" y="173">QUESTION</text>
+    <text x="260" y="166">RETRIEVER</text>
+    <text x="420" y="166">SUMMARIZER</text>
+    <text x="560" y="166">CRITIC</text>
+    <text x="705" y="173">ANSWER</text>
+  </g>
+  <g fill="#fff6e9" fill-opacity="0.55" font-size="11.5" text-anchor="middle">
+    <text x="260" y="186">multi-hop search</text>
+    <text x="420" y="186">synthesize</text>
+    <text x="560" y="186">check gaps</text>
+  </g>
+
+  <text x="56" y="278" fill="#fff6e9" font-size="13" font-weight="700" letter-spacing="1.2">CHROMADB INDEX</text>
+  <text x="56" y="299" fill="#fff6e9" fill-opacity="0.55" font-size="12">PDFs (PyMuPDF) + arXiv papers</text>
+
+  <g stroke="#fff6e9" stroke-opacity="0.55" stroke-width="1.4" marker-end="url(#arrow)">
+    <line x1="152" y1="168" x2="196" y2="168"/>
+    <line x1="322" y1="168" x2="356" y2="168"/>
+    <line x1="482" y1="168" x2="496" y2="168"/>
+    <line x1="622" y1="168" x2="646" y2="168"/>
+    <path d="M200 282 H260 V208" fill="none"/>
+  </g>
+
+  <path d="M560 206 C560 270 260 270 260 210" fill="none" stroke="#db1f18" stroke-width="1.4" stroke-dasharray="6 5" marker-end="url(#arrow-accent)"/>
+  <text x="410" y="262" fill="#db1f18" font-size="12" font-weight="700" letter-spacing="1" text-anchor="middle">REVISE IF GAPS</text>
+
+  <text x="40" y="380" fill="#fff6e9" fill-opacity="0.4" font-size="12">Independent steps run in parallel &#183; served through FastAPI</text>
+</svg>

@@ -1,15 +1,14 @@
 import { Helmet } from 'react-helmet-async'
-import { portfolioData } from '../../data/portfolioData'
+import { portfolioData, SITE_ORIGIN } from '../../data/portfolioData'
 
 const { siteName, defaultDescription } = portfolioData.seo
 const { personal } = portfolioData
 
 export function PageMeta({ title, description, path = '/' }) {
-  const origin = typeof window !== 'undefined' ? window.location.origin : ''
-  const pageTitle = title ?? `${personal.displayName} · ${personal.title}`
+  const pageTitle = title ?? `${siteName} · ${personal.title}`
   const metaDescription = description ?? defaultDescription
-  const url = `${origin}${path}`
-  const imageUrl = `${origin}/og-image.png`
+  const url = `${SITE_ORIGIN}${path}`
+  const imageUrl = `${SITE_ORIGIN}/og-image.png`
 
   return (
     <Helmet prioritizeSeoTags>
@@ -25,6 +24,7 @@ export function PageMeta({ title, description, path = '/' }) {
       <meta property="og:image" content={imageUrl} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={`${personal.fullName}, ${personal.title}`} />
       <meta property="og:locale" content="en_US" />
 
       <meta name="twitter:card" content="summary_large_image" />

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 470" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+  <title>Judged behavioral consistency of five student models</title>
+  <text x="40" y="46" fill="#fff6e9" font-size="15" font-weight="700" letter-spacing="2.5">JUDGED BEHAVIORAL CONSISTENCY</text>
+  <text x="40" y="70" fill="#fff6e9" fill-opacity="0.55" font-size="14">5 student models &#183; 32 scenarios &#183; all pass 100% of rule checks</text>
+
+  <g stroke="#fff6e9" stroke-opacity="0.1" stroke-width="1">
+    <line x1="230" y1="104" x2="230" y2="410"/>
+    <line x1="357.5" y1="104" x2="357.5" y2="410" stroke-dasharray="3 5"/>
+    <line x1="485" y1="104" x2="485" y2="410" stroke-dasharray="3 5"/>
+    <line x1="612.5" y1="104" x2="612.5" y2="410" stroke-dasharray="3 5"/>
+    <line x1="740" y1="104" x2="740" y2="410" stroke-dasharray="3 5"/>
+  </g>
+  <g fill="#fff6e9" fill-opacity="0.35" font-size="12" text-anchor="middle">
+    <text x="230" y="430">0%</text>
+    <text x="357.5" y="430">25%</text>
+    <text x="485" y="430">50%</text>
+    <text x="612.5" y="430">75%</text>
+    <text x="740" y="430">100%</text>
+  </g>
+
+  <g font-size="14" text-anchor="end">
+    <text x="214" y="140" fill="#fff6e9">Claude Sonnet 4.6</text>
+    <text x="214" y="196" fill="#db1f18" font-weight="700">Llama 3.1 8B</text>
+    <text x="214" y="213" fill="#db1f18" fill-opacity="0.8" font-size="11" letter-spacing="1">MY QLORA FINE-TUNE</text>
+    <text x="214" y="264" fill="#fff6e9">GPT-5.4</text>
+    <text x="214" y="326" fill="#fff6e9" fill-opacity="0.7">GPT-4o</text>
+    <text x="214" y="388" fill="#fff6e9" fill-opacity="0.7">GPT-5.5</text>
+  </g>
+
+  <rect x="230" y="120" width="382.5" height="30" rx="3" fill="#fff6e9" fill-opacity="0.85"/>
+  <rect x="230" y="182" width="379.95" height="30" rx="3" fill="#db1f18"/>
+  <rect x="230" y="244" width="369.24" height="30" rx="3" fill="#fff6e9" fill-opacity="0.6"/>
+  <rect x="230" y="306" width="276.42" height="30" rx="3" fill="#fff6e9" fill-opacity="0.25"/>
+  <rect x="230" y="368" width="273.36" height="30" rx="3" fill="#fff6e9" fill-opacity="0.25"/>
+
+  <g font-size="14" font-weight="700">
+    <text x="623" y="140" fill="#fff6e9">75.0%</text>
+    <text x="620" y="202" fill="#db1f18">74.5%</text>
+    <text x="610" y="264" fill="#fff6e9">72.4%</text>
+    <text x="517" y="326" fill="#fff6e9" fill-opacity="0.7">54.2%</text>
+    <text x="514" y="388" fill="#fff6e9" fill-opacity="0.7">53.6%</text>
+  </g>
+
+  <text x="40" y="458" fill="#fff6e9" fill-opacity="0.35" font-size="11.5">LLM-judged &#183; 192 turns per run &#183; TAMU Dream Lab</text>
+</svg>

@@ -1,33 +1,9 @@
 import { portfolioData } from '../../data/portfolioData'
 import { MotionReveal, MotionItem } from '../../components/MotionReveal/MotionReveal'
-import SectionCta from '../../components/SectionCta/SectionCta'
 import './StatsBlock.css'
 
-function StatsBlock({ variant = 'full' }) {
+function StatsBlock() {
   const { stats, experience, work } = portfolioData
-  const isPreview = variant === 'preview'
-
-  if (isPreview) {
-    return (
-      <section
-        id="work"
-        className="stats-block section section--preview"
-        aria-labelledby="stats-heading"
-      >
-        <div className="container">
-          <MotionReveal>
-            <h2 id="stats-heading" className="stats-block__heading display-text display-text--sm">
-              WORK
-            </h2>
-            <MotionItem>
-              <p className="stats-block__metrics stats-block__metrics--preview">{stats.metrics}</p>
-              <SectionCta to="/work">View work →</SectionCta>
-            </MotionItem>
-          </MotionReveal>
-        </div>
-      </section>
-    )
-  }
 
   return (
     <section id="work-stats" className="stats-block section" aria-labelledby="stats-detail-heading">

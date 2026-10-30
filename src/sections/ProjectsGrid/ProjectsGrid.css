@@ -17,7 +17,15 @@
 }
 
 .section--preview .projects-grid__subtext {
-  margin-bottom: 24px;
+  margin-bottom: 8px;
+}
+
+.projects-grid__metrics {
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 28px;
 }
 
 /* Default 2-col fallback (unused when bento active) */

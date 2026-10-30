@@ -1,7 +1,6 @@
 import PageLayout from '../../components/PageLayout/PageLayout'
 import Hero from '../../sections/Hero/Hero'
 import ExperienceTicker from '../../sections/ExperienceTicker/ExperienceTicker'
-import StatsBlock from '../../sections/StatsBlock/StatsBlock'
 import AboutBlurb from '../../sections/AboutBlurb/AboutBlurb'
 import ProjectsGrid from '../../sections/ProjectsGrid/ProjectsGrid'
 import { PageMeta } from '../../components/PageMeta/PageMeta'
@@ -16,7 +15,6 @@ function Landing() {
       <main id="main-content" className="landing">
         <Hero />
         <ExperienceTicker />
-        <StatsBlock variant="preview" />
         <ProjectsGrid variant="preview" />
         <AboutBlurb variant="preview" />
       </main>

@@ -16,7 +16,7 @@
 }
 
 .stats-block__line--dim {
-  color: var(--color-cream-20);
+  color: var(--color-cream-muted);
 }
 
 .stats-block__accent {
@@ -33,15 +33,11 @@
   line-height: 1.6;
 }
 
-.stats-block__metrics--preview {
-  margin-bottom: 8px;
-}
-
 .stats-block__subheading {
   font-size: 0.625rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-cream-20);
+  color: var(--color-cream-muted);
   margin-bottom: 20px;
 }
 
@@ -79,7 +75,7 @@
 
 .stats-block__job-dates {
   font-size: 0.625rem;
-  color: var(--color-cream-20);
+  color: var(--color-cream-muted);
 }
 
 .stats-block__job-role {
@@ -90,7 +86,7 @@
 
 .stats-block__job-location {
   font-size: 0.625rem;
-  color: var(--color-cream-20);
+  color: var(--color-cream-muted);
   margin-bottom: 10px;
 }
 
@@ -110,7 +106,7 @@
 .stats-block__tech {
   font-family: var(--font-mono);
   font-size: 0.5625rem;
-  color: var(--color-cream-20);
+  color: var(--color-cream-muted);
   border: 1px solid var(--color-cream-10);
   border-radius: 3px;
   padding: 2px 7px;
@@ -151,7 +147,7 @@
   font-size: 0.5625rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-cream-20);
+  color: var(--color-cream-muted);
   margin-bottom: 8px;
 }
 

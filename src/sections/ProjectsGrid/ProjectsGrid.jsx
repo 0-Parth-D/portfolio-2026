@@ -4,23 +4,23 @@ import ProjectCard from '../../components/ProjectCard/ProjectCard'
 import ProjectModal from '../../components/ProjectModal/ProjectModal'
 import SectionCta from '../../components/SectionCta/SectionCta'
 import { MotionReveal, MotionItem } from '../../components/MotionReveal/MotionReveal'
-import {
-  PREVIEW_PROJECT_IDS,
-  PREVIEW_LAYOUT,
-  BENTO_LAYOUT,
-  getBentoPlacementStyle,
-} from './projectGridLayouts'
+import { PREVIEW_LAYOUT, BENTO_LAYOUT, getBentoPlacementStyle } from './projectGridLayouts'
+import { bySortDateDesc } from './sortProjects'
 import './ProjectsGrid.css'
+
+const projectsById = Object.fromEntries(portfolioData.projects.map((p) => [p.id, p]))
 
 function ProjectsGrid({ variant = 'full', embedded = false }) {
   const [selectedProject, setSelectedProject] = useState(null)
-  const { projectsSection, projects } = portfolioData
+  const { projectsSection, projects, stats } = portfolioData
   const isPreview = variant === 'preview'
   const isBento = variant === 'asymmetric' || variant === 'bento'
 
-  const visibleProjects = isPreview
-    ? projects.filter((p) => PREVIEW_PROJECT_IDS.includes(p.id))
-    : projects
+  const layoutMap = isPreview ? PREVIEW_LAYOUT : isBento ? BENTO_LAYOUT : null
+
+  const visibleProjects = layoutMap
+    ? Object.keys(layoutMap).map((id) => projectsById[id]).filter(Boolean)
+    : projects.filter((p) => p.tier !== 'more').sort(bySortDateDesc)
 
   const gridClass = [
     'projects-grid__grid',
@@ -31,19 +31,17 @@ function ProjectsGrid({ variant = 'full', embedded = false }) {
     .filter(Boolean)
     .join(' ')
 
-  const layoutMap = isPreview ? PREVIEW_LAYOUT : isBento ? BENTO_LAYOUT : null
-
   const content = (
         <MotionReveal>
           <MotionItem>
             {!isBento && (
               embedded && isPreview ? (
                 <h3 className="projects-grid__heading display-text display-text--sm">
-                  FEATURED WORK
+                  {projectsSection.heading}
                 </h3>
               ) : (
                 <h2 id="projects-heading" className="projects-grid__heading display-text display-text--sm">
-                  {isPreview ? 'FEATURED WORK' : projectsSection.heading}
+                  {projectsSection.heading}
                 </h2>
               )
             )}
@@ -58,10 +56,9 @@ function ProjectsGrid({ variant = 'full', embedded = false }) {
               </h2>
             )}
             <p className={`projects-grid__subtext${isBento ? ' projects-grid__subtext--wide' : ''}`}>
-              {isPreview
-                ? 'Recent builds — LLM fine-tuning, RAG, multi-agent research, and computer vision.'
-                : projectsSection.subtext}
+              {projectsSection.subtext}
             </p>
+            {isPreview && <p className="projects-grid__metrics mono-text">{stats.metrics}</p>}
           </MotionItem>
 
           <div className={gridClass}>
@@ -84,7 +81,7 @@ function ProjectsGrid({ variant = 'full', embedded = false }) {
                   <ProjectCard
                     project={project}
                     onClick={setSelectedProject}
-                    compact={isPreview && layout?.variant === 'compact'}
+                    compact={layout?.variant === 'compact'}
                     sizeVariant={layout?.variant}
                   />
                 </MotionItem>
@@ -92,7 +89,7 @@ function ProjectsGrid({ variant = 'full', embedded = false }) {
             })}
           </div>
 
-          {isPreview && !embedded && <SectionCta to="/work">View work →</SectionCta>}
+          {isPreview && !embedded && <SectionCta to="/work">View all work →</SectionCta>}
         </MotionReveal>
   )
 
@@ -104,25 +101,16 @@ function ProjectsGrid({ variant = 'full', embedded = false }) {
     />
   )
 
-  if (embedded) {
-    return (
-      <section
-        id="projects"
-        className="projects-grid section projects-grid--embedded"
-        aria-labelledby="projects-heading"
-      >
-        <div className="container">
-          {content}
-        </div>
-        {modal}
-      </section>
-    )
-  }
-
   return (
     <section
       id="projects"
-      className={`projects-grid section${isPreview ? ' section--preview' : ''}`}
+      className={[
+        'projects-grid section',
+        isPreview && !embedded && 'section--preview',
+        embedded && 'projects-grid--embedded',
+      ]
+        .filter(Boolean)
+        .join(' ')}
       aria-labelledby="projects-heading"
     >
       <div className="container">

@@ -1,0 +1,24 @@
+/* Items only start hidden once the inline script in index.html has set html.js,
+   so content stays visible if JavaScript never runs. */
+html.js [data-reveal]:not(.reveal--visible) [data-reveal-item] {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+[data-reveal-item] {
+  transition:
+    opacity 0.7s var(--ease-spring) var(--reveal-delay, 0s),
+    transform 0.9s var(--ease-spring) var(--reveal-delay, 0s);
+}
+
+.reveal--instant [data-reveal-item] {
+  transition-duration: 0.2s;
+  transition-delay: 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal]:not(.reveal--visible) [data-reveal-item] {
+    opacity: 1;
+    transform: none;
+  }
+}

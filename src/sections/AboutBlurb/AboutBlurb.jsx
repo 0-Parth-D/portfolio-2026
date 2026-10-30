@@ -1,10 +1,11 @@
 import { portfolioData } from '../../data/portfolioData'
 import { MotionReveal, MotionItem } from '../../components/MotionReveal/MotionReveal'
 import SectionCta from '../../components/SectionCta/SectionCta'
+import NowLine from '../../components/NowLine/NowLine'
 import './AboutBlurb.css'
 
 function AboutBlurb({ variant = 'full' }) {
-  const { about, education, skills, certifications, awards } = portfolioData
+  const { about, education, skills, certifications, publications } = portfolioData
   const isPreview = variant === 'preview'
 
   if (isPreview) {
@@ -48,6 +49,7 @@ function AboutBlurb({ variant = 'full' }) {
             </div>
             <p className="about-blurb__tagline mono-text">{about.tagline}</p>
             <p className="about-blurb__bio">{about.bio}</p>
+            <NowLine className="about-blurb__now" />
           </MotionItem>
 
           <MotionItem className="about-blurb__right">
@@ -101,17 +103,25 @@ function AboutBlurb({ variant = 'full' }) {
               </div>
             )}
 
-            {awards.length > 0 && (
+            {publications.length > 0 && (
               <div className="about-blurb__awards">
-                <h3 className="about-blurb__section-label mono-text">Awards & Publications</h3>
-                {awards.map((award) => (
-                  <article key={award.title} className="about-blurb__award">
+                <h3 className="about-blurb__section-label mono-text">Publications</h3>
+                {publications.map((pub) => (
+                  <article key={pub.title} className="about-blurb__award">
                     <div className="about-blurb__award-header">
-                      <span className="about-blurb__award-title">{award.title}</span>
-                      <span className="about-blurb__award-date mono-text">{award.date}</span>
+                      <a
+                        href={pub.link}
+                        className="about-blurb__award-title about-blurb__award-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {pub.title}
+                      </a>
+                      <span className="about-blurb__award-date mono-text">{pub.date}</span>
                     </div>
-                    <p className="about-blurb__award-issuer">{award.issuer}</p>
-                    <p className="about-blurb__award-desc">{award.description}</p>
+                    <p className="about-blurb__award-issuer">
+                      {pub.venue} · {pub.role}
+                    </p>
                   </article>
                 ))}
               </div>

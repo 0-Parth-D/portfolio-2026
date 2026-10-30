@@ -1,38 +1,42 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { portfolioData } from '../../data/portfolioData'
-import { useLenisInstance } from '../../context/LenisContext'
-import { scrollToSection } from '../../hooks/useLenis'
-import { downloadResume, useResumeAvailable } from '../../utils/resume'
+import ResumeMenu from '../ResumeMenu/ResumeMenu'
 import './StickyNav.css'
 
 const NAV_LINKS = [
   { label: 'about', to: '/about' },
   { label: 'work', to: '/work' },
-  { label: 'contact', to: '#contact', isContact: true },
+  { label: 'contact', to: '/contact' },
 ]
 
-const HOME_SECTION_IDS = ['work', 'projects', 'about', 'contact']
+const HOME_SECTION_FOR_LINK = { '/work': 'projects', '/about': 'about' }
+const HOME_SECTION_IDS = Object.values(HOME_SECTION_FOR_LINK)
 
 function StickyNav() {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('')
-  const lenisRef = useLenisInstance()
-  const resumeAvailable = useResumeAvailable()
+  const { pathname } = useLocation()
+  const isHome = pathname === '/'
+
+  // State is keyed by pathname so it resets on navigation without a setState-in-effect.
+  const [menuOpenFor, setMenuOpenFor] = useState(null)
+  const [visibleSection, setVisibleSection] = useState({ path: null, id: '' })
+  const menuOpen = menuOpenFor === pathname
+  const activeSection = visibleSection.path === pathname ? visibleSection.id : ''
+
   const menuRef = useRef(null)
-  const location = useLocation()
-  const isHome = location.pathname === '/'
+
+  const closeMenu = useCallback(() => setMenuOpenFor(null), [])
 
   useEffect(() => {
-    const sectionIds = isHome ? HOME_SECTION_IDS : ['contact']
+    if (!isHome) return undefined
     const observers = []
 
-    sectionIds.forEach((id) => {
+    HOME_SECTION_IDS.forEach((id) => {
       const el = document.getElementById(id)
       if (!el) return
       const observer = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id)
+          if (entry.isIntersecting) setVisibleSection({ path: pathname, id })
         },
         { rootMargin: '-40% 0px -50% 0px', threshold: 0 }
       )
@@ -40,53 +44,27 @@ function StickyNav() {
       observers.push(observer)
     })
 
-    if (!isHome) {
-      setActiveSection('')
-    }
-
     return () => observers.forEach((o) => o.disconnect())
-  }, [isHome, location.pathname])
-
-  useEffect(() => {
-    setMenuOpen(false)
-  }, [location.pathname])
+  }, [isHome, pathname])
 
   useEffect(() => {
     if (!menuOpen) return undefined
     document.body.style.overflow = 'hidden'
 
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') setMenuOpen(false)
+      if (e.key === 'Escape') closeMenu()
     }
     document.addEventListener('keydown', handleKeyDown)
     return () => {
       document.body.style.overflow = ''
       document.removeEventListener('keydown', handleKeyDown)
     }
-  }, [menuOpen])
+  }, [menuOpen, closeMenu])
 
-  const handleContactClick = useCallback(
-    (e) => {
-      e.preventDefault()
-      setMenuOpen(false)
-      scrollToSection(lenisRef, '#contact')
-    },
-    [lenisRef]
-  )
-
-  const handleResume = (e) => {
-    e.preventDefault()
-    if (resumeAvailable) downloadResume()
-    else window.open('/resume.pdf', '_blank', 'noopener')
-  }
-
-  const isLinkActive = (to) => {
-    if (to === '#contact') return activeSection === 'contact'
-    if (to === '/about' || to === '/work') {
-      return location.pathname === to || (isHome && activeSection === to.slice(1))
-    }
-    return false
-  }
+  const isLinkActive = (to) =>
+    pathname === to ||
+    pathname.startsWith(`${to}/`) ||
+    (isHome && activeSection === HOME_SECTION_FOR_LINK[to])
 
   const linkClass = (to) =>
     `sticky-nav__link${isLinkActive(to) ? ' sticky-nav__link--active' : ''}`
@@ -99,37 +77,21 @@ function StickyNav() {
         </NavLink>
 
         <nav className="sticky-nav__links" aria-label="Main navigation">
-          {NAV_LINKS.map((link) =>
-            link.isContact ? (
-              <a
-                key={link.to}
-                href="#contact"
-                className={linkClass(link.to)}
-                onClick={handleContactClick}
-              >
-                {link.label}
-              </a>
-            ) : (
-              <NavLink key={link.to} to={link.to} className={linkClass(link.to)}>
-                {link.label}
-              </NavLink>
-            )
-          )}
+          {NAV_LINKS.map((link) => (
+            <NavLink key={link.to} to={link.to} className={linkClass(link.to)}>
+              {link.label}
+            </NavLink>
+          ))}
         </nav>
 
-        <button
-          type="button"
-          className="sticky-nav__resume"
-          onClick={handleResume}
-          aria-label="Download resume"
-        >
-          Resume ↗
-        </button>
+        <div className="sticky-nav__resume-slot">
+          <ResumeMenu variant="nav" />
+        </div>
 
         <button
           type="button"
           className="sticky-nav__hamburger"
-          onClick={() => setMenuOpen((o) => !o)}
+          onClick={() => setMenuOpenFor(menuOpen ? null : pathname)}
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
@@ -150,25 +112,17 @@ function StickyNav() {
           aria-label="Mobile navigation"
         >
           <nav className="sticky-nav__mobile-links">
-            {NAV_LINKS.map((link) =>
-              link.isContact ? (
-                <a
-                  key={link.to}
-                  href="#contact"
-                  className="sticky-nav__mobile-link"
-                  onClick={handleContactClick}
-                >
-                  {link.label}
-                </a>
-              ) : (
-                <NavLink key={link.to} to={link.to} className="sticky-nav__mobile-link">
-                  {link.label}
-                </NavLink>
-              )
-            )}
-            <button type="button" className="sticky-nav__mobile-resume" onClick={handleResume}>
-              Resume ↗
-            </button>
+            {NAV_LINKS.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                className="sticky-nav__mobile-link"
+                onClick={closeMenu}
+              >
+                {link.label}
+              </NavLink>
+            ))}
+            <ResumeMenu variant="mobile" onNavigate={closeMenu} />
           </nav>
         </div>
       )}

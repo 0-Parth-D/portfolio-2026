@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 660" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+  <title>Clinical trials question to cited chart flow</title>
+  <defs>
+    <marker id="down" viewBox="0 0 10 10" refX="5" refY="9" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 0 L5 10 z" fill="#fff6e9" fill-opacity="0.55"/>
+    </marker>
+  </defs>
+
+  <text x="40" y="46" fill="#fff6e9" font-size="14" font-weight="700" letter-spacing="2.5">QUESTION &#8594; CITED CHART</text>
+
+  <path d="M40 72 H480 A10 10 0 0 1 490 82 V128 A10 10 0 0 1 480 138 H90 L68 156 L72 138 H50 A10 10 0 0 1 40 128 V82 A10 10 0 0 1 50 72 Z" fill="#fff6e9" fill-opacity="0.06" stroke="#fff6e9" stroke-opacity="0.3"/>
+  <text x="60" y="100" fill="#fff6e9" fill-opacity="0.45" font-size="11" letter-spacing="1.5">EXAMPLE QUESTION</text>
+  <text x="60" y="122" fill="#fff6e9" font-size="16" font-style="italic">"Recruiting phase 3 trials, by country?"</text>
+
+  <g stroke="#fff6e9" stroke-opacity="0.55" stroke-width="1.4" marker-end="url(#down)">
+    <line x1="260" y1="160" x2="260" y2="186"/>
+    <line x1="260" y1="256" x2="260" y2="282"/>
+    <line x1="260" y1="352" x2="260" y2="378"/>
+    <line x1="260" y1="448" x2="260" y2="474"/>
+  </g>
+
+  <rect x="40" y="190" width="450" height="64" rx="6" fill="none" stroke="#fff6e9" stroke-opacity="0.3" stroke-dasharray="5 4"/>
+  <text x="60" y="218" fill="#fff6e9" font-size="14" font-weight="700" letter-spacing="1.2">LLM PARSES INTENT</text>
+  <text x="60" y="239" fill="#fff6e9" fill-opacity="0.55" font-size="12">filters only &#183; never produces a number</text>
+
+  <rect x="40" y="286" width="450" height="64" rx="6" fill="none" stroke="#fff6e9" stroke-opacity="0.3"/>
+  <text x="60" y="314" fill="#fff6e9" font-size="14" font-weight="700" letter-spacing="1.2">CLINICALTRIALS.GOV API V2</text>
+  <text x="60" y="335" fill="#fff6e9" fill-opacity="0.55" font-size="12">fetch and normalize matching studies</text>
+
+  <rect x="40" y="382" width="450" height="64" rx="6" fill="#db1f18" fill-opacity="0.12" stroke="#db1f18" stroke-width="1.4"/>
+  <text x="60" y="410" fill="#fff6e9" font-size="14" font-weight="700" letter-spacing="1.2">AGGREGATE IN CODE</text>
+  <text x="60" y="431" fill="#fff6e9" fill-opacity="0.7" font-size="12">deterministic counts &#183; every number traceable</text>
+
+  <rect x="40" y="478" width="450" height="150" rx="6" fill="none" stroke="#fff6e9" stroke-opacity="0.3"/>
+  <line x1="70" y1="600" x2="330" y2="600" stroke="#fff6e9" stroke-opacity="0.2"/>
+  <rect x="80" y="520" width="44" height="80" rx="2" fill="#db1f18"/>
+  <rect x="140" y="545" width="44" height="55" rx="2" fill="#fff6e9" fill-opacity="0.55"/>
+  <rect x="200" y="562" width="44" height="38" rx="2" fill="#fff6e9" fill-opacity="0.35"/>
+  <rect x="260" y="578" width="44" height="22" rx="2" fill="#fff6e9" fill-opacity="0.2"/>
+  <g fill="#fff6e9" fill-opacity="0.7" font-size="10" text-anchor="middle">
+    <text x="102" y="512">[1]</text>
+    <text x="162" y="537">[2]</text>
+    <text x="222" y="554">[3]</text>
+    <text x="282" y="570">[4]</text>
+  </g>
+  <text x="350" y="530" fill="#fff6e9" font-size="14" font-weight="700" letter-spacing="1.2">CITED CHART</text>
+  <text x="350" y="552" fill="#fff6e9" fill-opacity="0.55" font-size="12">6 chart types</text>
+  <text x="350" y="571" fill="#fff6e9" fill-opacity="0.55" font-size="12">links to source</text>
+  <text x="350" y="590" fill="#fff6e9" fill-opacity="0.55" font-size="12">studies</text>
+</svg>

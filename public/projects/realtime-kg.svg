@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 430" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+  <title>Realtime knowledge graph pipeline</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#fff6e9" fill-opacity="0.55"/>
+    </marker>
+    <marker id="arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#db1f18"/>
+    </marker>
+  </defs>
+
+  <text x="30" y="40" fill="#fff6e9" font-size="14" font-weight="700" letter-spacing="2.5">MEETING AUDIO &#8594; QUERYABLE KNOWLEDGE GRAPH</text>
+
+  <g fill="none" stroke="#fff6e9" stroke-opacity="0.3" stroke-width="1.2">
+    <rect x="30" y="70" width="140" height="64" rx="6"/>
+    <rect x="210" y="70" width="120" height="64" rx="6"/>
+    <rect x="370" y="70" width="140" height="64" rx="6"/>
+    <rect x="300" y="290" width="220" height="64" rx="6"/>
+    <rect x="30" y="290" width="220" height="64" rx="6"/>
+  </g>
+  <rect x="550" y="70" width="200" height="64" rx="6" fill="#db1f18" fill-opacity="0.12" stroke="#db1f18" stroke-width="1.4"/>
+  <rect x="560" y="290" width="190" height="64" rx="6" fill="none" stroke="#db1f18" stroke-opacity="0.7" stroke-width="1.2" stroke-dasharray="5 4"/>
+
+  <g fill="#fff6e9" font-size="14" font-weight="700" letter-spacing="1.2">
+    <text x="44" y="98">SPEECH-TO-TEXT</text>
+    <text x="224" y="98">KAFKA</text>
+    <text x="384" y="98">TEMPORAL</text>
+    <text x="564" y="98">SUPERVISOR</text>
+    <text x="574" y="318">MCP WRITE GATE</text>
+    <text x="314" y="318">NEO4J + QDRANT</text>
+    <text x="44" y="318">GRAPHRAG API</text>
+  </g>
+  <g fill="#fff6e9" fill-opacity="0.55" font-size="12">
+    <text x="44" y="119">faster-whisper + pyannote</text>
+    <text x="224" y="119">transcript events</text>
+    <text x="384" y="119">durable workflows</text>
+    <text x="564" y="119">LangGraph &#183; routes segments</text>
+    <text x="574" y="339">reviews before commit</text>
+    <text x="314" y="339">graph + vector stores</text>
+    <text x="44" y="339">FastAPI &#183; Cypher or semantic</text>
+  </g>
+
+  <g stroke="#fff6e9" stroke-opacity="0.55" stroke-width="1.4" marker-end="url(#arrow)">
+    <line x1="172" y1="102" x2="206" y2="102"/>
+    <line x1="332" y1="102" x2="366" y2="102"/>
+    <line x1="558" y1="322" x2="524" y2="322"/>
+    <line x1="298" y1="322" x2="254" y2="322"/>
+  </g>
+  <line x1="512" y1="102" x2="546" y2="102" stroke="#db1f18" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+
+  <g stroke="#db1f18" stroke-opacity="0.6" stroke-width="1.2" fill="none">
+    <path d="M650 134 C650 160 432 150 432 180"/>
+    <path d="M650 134 C650 160 524 155 524 180"/>
+    <path d="M650 134 C650 160 616 160 616 180"/>
+    <path d="M650 134 C650 160 708 160 708 180"/>
+    <path d="M432 220 C432 260 655 250 655 288"/>
+    <path d="M524 220 C524 258 655 252 655 288"/>
+    <path d="M616 220 C616 256 655 256 655 288"/>
+    <path d="M708 220 C708 256 655 256 655 288"/>
+  </g>
+
+  <g fill="#1a1917" stroke="#fff6e9" stroke-opacity="0.35" stroke-width="1.1">
+    <rect x="390" y="180" width="84" height="40" rx="20"/>
+    <rect x="482" y="180" width="84" height="40" rx="20"/>
+    <rect x="574" y="180" width="84" height="40" rx="20"/>
+    <rect x="666" y="180" width="84" height="40" rx="20"/>
+  </g>
+  <g fill="#fff6e9" font-size="12" font-weight="700" letter-spacing="1" text-anchor="middle">
+    <text x="432" y="204">DECISION</text>
+    <text x="524" y="204">TASK</text>
+    <text x="616" y="204">RISK</text>
+    <text x="708" y="204">TOPIC</text>
+  </g>
+  <text x="30" y="204" fill="#fff6e9" fill-opacity="0.45" font-size="12" letter-spacing="1.5">4 SPECIALIZED AGENTS &#8594;</text>
+
+  <circle cx="36" cy="396" r="4" fill="#db1f18"/>
+  <text x="48" y="400" fill="#fff6e9" fill-opacity="0.45" font-size="12">Langfuse + OpenTelemetry traces on every stage &#183; speech-to-text only, no TTS</text>
+</svg>

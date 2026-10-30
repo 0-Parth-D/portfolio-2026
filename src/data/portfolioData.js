@@ -1,14 +1,18 @@
-// Portfolio data — Harshal-style single-page layout (design doc + resume)
+// Portfolio content: every number here is measured. Provisional results say so.
 
 const GITHUB_PROFILE = 'https://github.com/0-Parth-D'
 const HUGGINGFACE_PROFILE = 'https://huggingface.co/0-Parth-D'
 const GITHUB_REPOS = {
-  llmFineTuning: 'https://github.com/0-Parth-D',
+  dreamLab: 'https://github.com/0-Parth-D/group-student-simulator',
+  realtimeKg: 'https://github.com/0-Parth-D/realtime-multiagent-kg',
   ragAssistant: 'https://github.com/0-Parth-D/RAG-Powered-Code-Assistant',
-  multiAgent: 'https://github.com/0-Parth-D',
+  clinicalTrials: 'https://github.com/0-Parth-D/Clinical-Trials-Query-To-Visualization-Agent',
+  llmFineTuning: 'https://github.com/0-Parth-D/llm-lora-finetuning',
+  multiAgent: 'https://github.com/0-Parth-D/Multi-Agent-Research-Assistant',
   satelliteSegmentation: 'https://github.com/0-Parth-D/Satellite-Segmentation-SAM3',
 }
-const PLACEHOLDER_IMG = '/project-card-placeholder.svg'
+
+export const SITE_ORIGIN = 'https://parthdeshmukh.vercel.app'
 
 export const portfolioData = {
   personal: {
@@ -16,53 +20,68 @@ export const portfolioData = {
     firstName: 'Parth',
     lastName: 'Deshmukh',
     fullName: 'Parth Sachin Deshmukh',
-    title: 'ML Engineer',
-    tagline:
-      'Building LLM fine-tuning pipelines, RAG systems, and computer vision models',
-    heroSubtitle:
-      'ML Engineer · LLM fine-tuning · RAG systems · Computer Vision',
-    location: 'Bryan, Texas',
+    title: 'Software Engineer · Applied AI Systems',
+    tagline: 'Building backend services, agents, and retrieval systems with measured results',
+    heroSubtitle: 'Software Engineer · Applied AI Systems',
+    location: 'College Station, TX',
+    relocation: 'open to relocation',
     email: 'parthdeshmukh321@gmail.com',
-    phone: '+1 (979) 492-9902',
     linkedin: 'https://linkedin.com/in/parth-deshmukh-a1542b238',
     github: GITHUB_PROFILE,
     huggingface: HUGGINGFACE_PROFILE,
-    website: 'https://parthdeshmukh.vercel.app',
-    profileImage: '/1720902504174.jpg',
-    portfolioUrl: '',
+    website: SITE_ORIGIN,
+    resumes: [
+      { id: 'backend', label: 'Backend / SWE resume', href: '/resume/parth-deshmukh-backend.pdf' },
+      { id: 'applied-ai', label: 'Applied AI resume', href: '/resume/parth-deshmukh-applied-ai.pdf' },
+    ],
   },
 
   seo: {
     siteName: 'Parth Deshmukh',
     defaultDescription:
-      'Parth Deshmukh — ML Engineer building LLM fine-tuning pipelines, RAG systems, and computer vision models. MS Computer Science @ Texas A&M · First Author, Springer 2024.',
+      'Parth Deshmukh, Software Engineer building backend services, LLM agents, and retrieval systems with measured results. MS Computer Science @ Texas A&M (May 2027) · First Author, Springer 2024.',
   },
 
   hero: {
     lines: [
-      { parts: [{ text: 'BEYOND' }] },
-      { parts: [{ text: 'MODELS' }] },
       {
         parts: [
-          { text: 'BUILDING ' },
-          { text: 'INTELLIGENCE', highlight: true },
-          { text: ', ' },
-          { text: 'NOT JUST WITH', muted: true },
-          { text: ' CODE' },
+          { text: 'I BUILD ' },
+          { text: 'AI SYSTEMS', highlight: true },
         ],
       },
-      { parts: [{ text: 'BUT WITH', muted: true }] },
+      {
+        parts: [
+          { text: 'THAT SHIP, ' },
+          { text: 'WITH', muted: true },
+        ],
+      },
     ],
-    accent: 'curiosity',
-    pills: ['portfolio 2026', '#ml-engineer', '#first-author'],
+    accent: 'curiosity.',
+    pills: ['new grad · may 2027', '#backend', '#applied-ai'],
+    intro: {
+      name: 'Parth Deshmukh',
+      role: 'Software Engineer · Applied AI Systems',
+      meta: 'MS Computer Science @ Texas A&M · GPA 4.0 · May 2027',
+    },
     subtext:
-      'ML Engineer · LLM fine-tuning · RAG systems · Computer Vision — MS Computer Science @ Texas A&M · GPA 4.0 · First Author, Springer 2024',
+      'Backend services, LLM agents, retrieval and evaluation. Tested, measured, and shipped. First author, Springer 2024.',
+  },
+
+  /** What I'm working on right now. Update `updated` whenever the items change. */
+  now: {
+    updated: 'Oct 2026',
+    items: [
+      { text: 'LLM student simulators at the TAMU Dream Lab', to: '/work/dream-lab' },
+      { text: 'the frontend for my realtime meeting knowledge graph', to: '/work/realtime-kg' },
+    ],
   },
 
   ticker: {
     items: [
-      { company: 'IIT BOMBAY', role: 'ML Research Intern' },
+      { company: 'TEXAS A&M', role: 'Graduate Assistant' },
       { company: 'TEXAS A&M', role: 'MS Computer Science' },
+      { company: 'IIT BOMBAY', role: 'ML/Data Research Intern' },
       { company: 'SPRINGER 2024', role: 'First Author' },
       { company: 'TOKUSHIMA UNIVERSITY', role: 'Exchange Scholar' },
     ],
@@ -70,93 +89,79 @@ export const portfolioData = {
 
   stats: {
     lines: [
-      { text: 'RESEARCH THAT', dim: true },
-      { text: 'SHIPS.', dim: false },
-      { text: 'FIRST AUTHOR,', dim: true },
-      { text: 'SPRINGER', accent: true, suffix: ' 2024' },
+      { text: 'MEASURED.', dim: true },
+      { text: 'TESTED.', dim: true },
+      { text: 'SHIPPED', accent: true, suffix: '.' },
     ],
-    metrics: '+65% ROUGE-L · 5,000+ docs indexed · 85% test coverage · 10,000-doc corpus',
+    metrics: '29 pytest modules · 93% test coverage · 0.88 recall@5 · +65% ROUGE-L',
   },
 
   about: {
-    /** Short pull-quote — home preview only */
+    /** Short pull-quote, home preview only */
     journey:
-      "from engineering in Pune, research at IIT Bombay, and now building AI systems at Texas A&M — it's always about the problem.",
-    /** Expanded narrative — about page only */
+      "from engineering in Pune, research at IIT Bombay, and now building backend and AI systems at Texas A&M. it's always about the problem.",
+    /** Expanded narrative, about page only */
     journeyExpanded: [
-      'I grew up in Pune writing code before I knew what ML engineering meant. VIIT gave me the foundations; IIT Bombay showed me what research at scale looks like — full-stack analytics for 20+ faculty, not slide decks.',
-      'At Texas A&M I am pursuing an MS in Computer Science (GPA 4.0), focused on LLM fine-tuning, retrieval systems, and computer vision. I care about models that ship: reproducible pipelines, honest evaluation, and tools people actually use.',
+      'I studied Information Technology at VIIT in Pune, which gave me the foundations. IIT Bombay showed me what building for real users looks like: an analytics platform used by 20+ faculty, not slide decks.',
+      "At Texas A&M I'm pursuing an MS in Computer Science (GPA 4.0) and work as a Graduate Assistant at the Graduate and Professional School. Outside class I build backend and applied AI systems: agent pipelines, retrieval with honest evaluation, and services with real test suites.",
     ],
-    bio: 'First-author Springer publication. Exchange scholar at Tokushima University. I build where curiosity meets systems thinking — always asking whether the model solves a real problem.',
-    tagline: '→ Curiosity · Systems Thinking · Research that ships',
+    bio: 'First-author Springer publication. Exchange scholar at Tokushima University. Research in the TAMU Dream Lab, building and evaluating LLM student simulations for teacher training.',
+    tagline: '→ Curiosity · Systems thinking · Honest evaluation',
     lookingFor:
-      'Open to ML Engineer and Research Engineer internships and full-time roles starting May 2027 — especially teams building LLM infrastructure, RAG products, or applied computer vision.',
-    skills: [
-      'PyTorch',
-      'LangChain',
-      'HuggingFace',
-      'FastAPI',
-      'Docker',
-      'LangGraph',
-      'ChromaDB',
-      'AWS',
-    ],
+      'Open to new-grad Software Engineer, Backend, and Applied AI / ML roles starting May 2027, and to internships before then. Especially teams building agents, retrieval, data platforms, or developer tools.',
     pageLede:
-      'The path from Pune to IIT Bombay to Texas A&M — education, craft, and what shaped how I build.',
+      'The path from Pune to IIT Bombay to Texas A&M: education, craft, and what shaped how I build.',
   },
 
   work: {
+    title: 'SYSTEMS THAT SHIP',
     pageLede:
-      'First-author Springer publication, IIT Bombay research, and production ML systems — from fine-tuning pipelines to full-stack analytics platforms.',
+      'Backend and applied AI systems with real tests and measured results, plus IIT Bombay research and a first-author Springer publication.',
     processBlurb:
-      'From LoRA fine-tuning and LangGraph agents to SAM2 segmentation and full-stack analytics — I ship end-to-end ML systems with rigorous evaluation, reproducible builds, and production-minded tooling.',
+      'I start from the problem, build the smallest pipeline that works, then measure it with test suites, eval batteries, and benchmarks. Numbers on this site are measured; where a result is provisional, it says so.',
   },
 
   philosophy: {
-    label: 'Intuition',
+    label: 'How I build',
     lines: [
-      'MY INTUITION IS THE SIGNAL.',
-      'I BUILD NOT FOR DEMOS, BUT FOR',
-      { accent: 'impact,' },
-      'ENSURING EVERY MODEL CUTS THROUGH THE NOISE AND DELIVERS',
-      { accent: 'results.' },
+      "IF IT ISN'T MEASURED,",
+      "IT ISN'T DONE. I BUILD FOR",
+      { accent: 'people,' },
+      'NOT DEMOS, AND SHIP WHAT',
+      { accent: 'holds up.' },
     ],
   },
 
-  specialties: [
-    'LLM Fine-Tuning',
-    '(1) RAG Systems',
-    'Computer Vision',
-    'Multi-Agent',
-    'MLOps',
-  ],
+  specialties: ['Backend APIs', 'Agents & RAG', 'LLM Evaluation', 'Fine-Tuning', 'Data Pipelines'],
 
   projectsSection: {
     heading: 'FEATURED WORK',
     subtext:
-      'LLM fine-tuning, RAG pipelines, multi-agent systems, computer vision — and research that ships.',
+      'Agents, retrieval, evaluation, and fine-tuning, with the numbers to back them up.',
+    moreHeading: 'MORE WORK',
+    moreSubtext: 'Platforms, systems, and earlier builds.',
   },
 
   experience: [
     {
-      company: 'Indian Institute of Technology (IIT) Bombay',
-      position: 'Research Intern',
-      location: 'Mumbai, India',
-      startDate: 'Feb 2024',
-      endDate: 'Sept 2024',
+      company: 'Texas A&M University, Graduate and Professional School',
+      position: 'Graduate Assistant (Non-Teaching)',
+      location: 'College Station, TX',
+      startDate: 'Apr 2026',
+      endDate: 'Present',
       description:
-        'Developed a PHP and JavaScript data visualization and theme builder with the Yii Framework for 20+ professors. Built a full-stack Figma-to-HTML parser with drag-and-drop and a reusable reporting theme system for 100+ reports. Optimized MySQL with indexing and AJAX for 500+ layout configurations.',
-      technologies: ['PHP', 'JavaScript', 'Yii Framework', 'MySQL', 'AJAX', 'HTML/CSS', 'TypeScript'],
+        'Configure the Slate CRM and analyze its data for the graduate school, set up events and run mailings and event communications in Slate, and build and maintain pages on the graduate school website. Promoted from Student Intern (CRM) in Sep 2026.',
+      technologies: ['Slate CRM', 'Data analysis', 'Event operations', 'Web pages'],
     },
     {
-      company: 'HTS Tech Solutions',
-      position: 'UI/UX Design Intern',
-      location: 'Pune, India',
-      startDate: 'Jun 2022',
-      endDate: 'Dec 2022',
+      company: 'Indian Institute of Technology (IIT) Bombay',
+      position: 'ML/Data Research Intern',
+      location: 'Mumbai, India',
+      startDate: 'Feb 2024',
+      endDate: 'Sep 2024',
       description:
-        'Designed interactive data visualization dashboards for analytics products. Created wireframes and prototypes, iterated on feedback, and aligned deliverables with accessibility standards.',
-      technologies: ['Figma', 'UI/UX', 'Wireframing', 'Prototyping', 'Accessibility'],
+        'Built and deployed a full-stack analytics platform used by 20+ faculty. A Figma-to-HTML parser powers 100+ reusable report templates and cut dashboard setup time by ~60%. Indexed MySQL across 500+ layout configurations and added AJAX loading, cutting latency by ~40–80%.',
+      technologies: ['PHP', 'JavaScript', 'TypeScript', 'Yii Framework', 'MySQL', 'AJAX'],
     },
   ],
 
@@ -167,15 +172,15 @@ export const portfolioData = {
       field: 'Computer Science',
       location: 'College Station, TX',
       startDate: '2025',
-      endDate: '2027',
+      endDate: 'May 2027',
       gpa: '4.0',
       achievements: [
-        'Coursework: Artificial Intelligence, Analysis of Algorithms, Data Mining',
+        'Coursework: Artificial Intelligence, Natural Language Processing, Analysis of Algorithms, Data Mining',
       ],
     },
     {
-      institution: 'VIIT',
-      degree: 'BS Information Technology',
+      institution: 'Vishwakarma Institute of Information Technology (VIIT)',
+      degree: 'B.Tech Information Technology',
       field: 'Information Technology',
       location: 'Pune, India',
       startDate: '2020',
@@ -186,205 +191,352 @@ export const portfolioData = {
   ],
 
   skills: {
-    programming: ['C++', 'Python', 'SQL', 'JavaScript', 'R'],
-    frameworks: ['LangChain', 'TensorFlow', 'PyTorch', 'Scikit-learn', 'OpenCV'],
-    tools: ['Docker', 'Git', 'GitHub', 'CI/CD', 'ChromaDB', 'AWS', 'FastAPI', 'LangGraph'],
-    methodologies: [
-      'Retrieval-Augmented Generation (RAG)',
-      'Large Language Models (LLMs)',
-      'Deep Learning',
-      'Multi-Agent Systems',
-      'MLOps',
-    ],
+    languages: ['Python', 'C++17', 'TypeScript', 'JavaScript', 'SQL'],
+    'backend & apis': ['FastAPI', 'Pydantic', 'REST', 'Kafka', 'Temporal', 'React'],
+    'ai & llms': ['PyTorch', 'LangGraph', 'LangChain', 'HuggingFace', 'LoRA / QLoRA', 'RAG'],
+    'data & storage': ['Neo4j', 'Qdrant', 'ChromaDB', 'Pinecone', 'MySQL', 'SQLite'],
+    'testing & devops': ['pytest', 'GoogleTest', 'Docker', 'GitHub Actions', 'CMake', 'OpenTelemetry'],
   },
 
   projects: [
     {
-      id: 'llm-fine-tuning',
-      title: 'LLM Fine-Tuning: Code Generation',
-      category: 'Personal · LLM',
-      date: 'Apr 2026',
-      cardDescription: 'LLaMA 3.2 + LoRA · +65% ROUGE-L · HuggingFace Hub demo',
-      image: PLACEHOLDER_IMG,
-      link: HUGGINGFACE_PROFILE,
-      github: GITHUB_REPOS.llmFineTuning,
-      featured: true,
-      featuredSpan: false,
-      technologies: ['PyTorch', 'LoRA', 'QLoRA', 'Gradio', 'HuggingFace'],
-      role: 'Solo — fine-tuning pipeline, evaluation, and demo deployment.',
+      id: 'dream-lab',
+      tier: 'featured',
+      caseStudy: true,
+      title: 'Student Simulator for Teacher Training',
+      category: 'Research · TAMU Dream Lab',
+      date: 'Jun 2026 – Present',
+      sortDate: '2026-10',
+      cardDescription:
+        '5 LLMs benchmarked on 32 scenarios · fine-tuned Llama 3.1 8B at 74.5% · 29 pytest modules',
+      image: '/projects/dream-lab.svg',
+      imageAlt:
+        'Bar chart of judged behavioral consistency for five student models, ranging from 53.6% to 75.0%',
+      link: '',
+      github: GITHUB_REPOS.dreamLab,
+      technologies: ['FastAPI', 'LangGraph', 'QLoRA', 'Qdrant', 'pytest', 'Claude / OpenAI'],
+      role: 'Research in the TAMU Dream Lab. I designed the research notebook and own response refinement, personality, group orchestration, context management, and offline evaluation.',
       contributions: [
-        'Fine-tuned LLaMA 3.2 with LoRA/QLoRA for code generation tasks',
-        'Achieved +65% ROUGE-L improvement over baseline',
-        'Published interactive Gradio demo on HuggingFace Hub',
+        'Simulated middle-school students for pre-service teacher practice, grounded in a Grade 6–8 learning progression (7 constructs × 4 levels) and a 26-entry misconception catalog',
+        'Benchmarked 5 student LLMs on a 32-scenario battery: all passed 100% of rule checks, while LLM-judged behavioral consistency ranged from 53.6% to 75.0%',
+        'Fine-tuned Llama 3.1 8B with 4-bit QLoRA on 768 dialogue examples (~4 hours on TAMU HPRC); it scored 74.5%, within 0.5 points of the best API model',
+        'Raised speak-constraint parsing from 81.7% to 91.7% exact match on 60 hand-labeled cases by replacing regex with an LLM parser plus a regex veto',
+        'Offline evaluation harness with 29 pytest modules',
       ],
       problem:
-        'Generic LLMs underperform on domain-specific code generation without targeted fine-tuning and efficient training methods.',
+        'Pre-service teachers need realistic practice with students who hold real misconceptions, and following rules is not the same as behaving like a real student.',
       approach:
-        'Parameter-efficient fine-tuning with LoRA/QLoRA on LLaMA 3.2, rigorous ROUGE-L evaluation, and HuggingFace Hub deployment.',
+        'A paper-backed knowledge graph and Big Five personality model, Self-Refine reply loops, LangGraph group sessions, and an eval harness that scores behavior, not just rule-following. Grounded in interviews with pre-service and experienced teachers.',
       outcome:
-        'Significant quality gains on code generation benchmarks with a publicly accessible demo.',
-      metrics: [{ value: '+65%', label: 'ROUGE-L' }],
+        'Every model passed the rule checks while realism varied by more than 20 points, and a fine-tuned 8B open model came within 0.5 points of the best API model.',
+      metrics: [
+        { value: '75.0%', label: 'Best judged consistency' },
+        { value: '74.5%', label: 'Fine-tuned Llama 3.1 8B' },
+        { value: '29', label: 'pytest modules' },
+      ],
+    },
+    {
+      id: 'realtime-kg',
+      tier: 'featured',
+      caseStudy: true,
+      title: 'Realtime Multi-Agent Knowledge Graph',
+      category: 'Personal · Agents & Streaming',
+      date: 'Jun 2026 – Present',
+      sortDate: '2026-09',
+      cardDescription:
+        'Meeting audio → Kafka → Temporal → 4 LangGraph agents → Neo4j + Qdrant GraphRAG',
+      image: '/projects/realtime-kg.svg',
+      imageAlt:
+        'Pipeline diagram: speech-to-text, Kafka, Temporal, four LangGraph agents, then Neo4j and Qdrant',
+      link: '',
+      github: GITHUB_REPOS.realtimeKg,
+      technologies: ['Kafka', 'Temporal', 'LangGraph', 'Neo4j', 'Qdrant', 'FastAPI'],
+      role: 'Solo: pipeline design, agents, storage, and observability.',
+      contributions: [
+        'Speech-to-text bridge (faster-whisper + pyannote diarization) turns meeting audio into speaker-labeled transcript events',
+        'Kafka events drive Temporal workflows that process transcript segments concurrently',
+        'A LangGraph supervisor routes each segment to decision, task, risk, and topic agents; an MCP write gate reviews changes before they reach Neo4j',
+        'A GraphRAG query API picks between Neo4j Cypher and Qdrant semantic search; every stage is traced with Langfuse and OpenTelemetry',
+      ],
+      problem: 'Decisions, tasks, and risks from meetings get lost in transcripts.',
+      approach:
+        'An event-driven pipeline: streaming transcripts, durable workflows, specialized agents, and a dual graph + vector store.',
+      outcome:
+        'The core pipeline runs end to end, from audio to a queryable knowledge graph. The frontend is still in progress.',
+      metrics: [{ value: '4', label: 'Specialized agents' }],
     },
     {
       id: 'rag-assistant',
+      tier: 'featured',
+      caseStudy: true,
       title: 'RAG-Powered Code Assistant',
-      category: 'Production · RAG',
-      date: 'Mar 2026',
+      category: 'Personal · Retrieval',
+      date: 'Mar – Oct 2026',
+      sortDate: '2026-10',
       cardDescription:
-        'LangChain + LLaMA 3 · 5,000+ docs · sub-second latency · PyPI published',
-      image: PLACEHOLDER_IMG,
+        'Custom agent loop · hybrid retrieval at 0.88 recall@5 · C++ tokenizer 4.9x faster · 93% coverage',
+      image: '/projects/rag-assistant.svg',
+      imageAlt:
+        'Bar chart of recall@5: hybrid BM25 plus dense retrieval 0.88, BM25 0.80, reranked 0.82, dense only 0.55',
       link: '',
       github: GITHUB_REPOS.ragAssistant,
-      featured: true,
-      featuredSpan: false,
-      technologies: ['LangChain', 'ChromaDB', 'Docker', 'FastAPI', 'LLaMA 3'],
-      role: 'Lead engineer — retrieval stack, packaging, and CI/CD.',
+      technologies: ['FastAPI', 'LangChain', 'Pinecone', 'C++ / pybind11', 'pytest', 'Docker'],
+      role: 'Solo: retrieval, agent loop, C++ extension, tests, and CI/CD.',
       contributions: [
-        'ChromaDB indexing and LangChain orchestration with a local LLM',
-        'PyPI/Conda packages via scikit-build-core; multi-OS build matrix',
-        'Docker images and GitHub Actions; pytest suite (~85% coverage)',
+        'Replaced the stock LangChain agent executor with a custom tool-calling loop capped at 6 steps and 8 tool calls, with timeouts, an empty-retrieval fallback, and JSON traces',
+        'Compared 4 retrievers on 220 auto-generated questions: hybrid BM25 + dense (reciprocal-rank fusion) reached 0.88 recall@5 vs 0.55 for dense alone; a cross-encoder reranker made results worse, so it was rejected',
+        'C++ pybind11 tokenizer benchmarked at 4.9x an equivalent pure-Python tokenizer on 4.46M tokens',
+        '106 pytest tests at 93% coverage (statements + branches); Docker image deployed to Hugging Face Spaces by GitHub Actions',
       ],
       problem:
-        'Making large project documentation searchable with accurate, grounded answers for developers.',
+        'Developers need grounded answers from large documentation sets, and retrieval quality has to be measured, not assumed.',
       approach:
-        'Vector indexing in ChromaDB, LangChain with LLaMA 3, reproducible builds via Docker and multi-OS CI.',
-      outcome: 'Installable packages with sub-second retrieval latency and high test coverage.',
+        'A FastAPI service with a bounded agent loop, hybrid retrieval evaluated on a 5,586-page Python / pandas / NumPy corpus, and a C++ extension for chunking.',
+      outcome:
+        'Hybrid retrieval beat dense-only by 33 points of recall@5. Provisional: the questions are auto-generated, not yet human-verified.',
       metrics: [
-        { value: '5,000+', label: 'Docs indexed' },
-        { value: '~85%', label: 'Test coverage' },
+        { value: '0.88', label: 'Recall@5 (hybrid)' },
+        { value: '4.9x', label: 'Tokenizer speedup' },
+        { value: '93%', label: 'Test coverage' },
+      ],
+    },
+    {
+      id: 'clinical-trials',
+      tier: 'featured',
+      title: 'Clinical Trials Query-to-Visualization Agent',
+      category: 'Personal · Data & Agents',
+      date: 'Apr 2026',
+      sortDate: '2026-04',
+      cardDescription:
+        'Plain-English questions → ClinicalTrials.gov API v2 → cited charts · counts never come from the LLM',
+      image: '/projects/clinical-trials.svg',
+      imageAlt:
+        'Flow diagram: a natural-language question becomes API filters, deterministic aggregation, and a cited chart',
+      link: '',
+      github: GITHUB_REPOS.clinicalTrials,
+      technologies: ['FastAPI', 'OpenAI API', 'Pydantic', 'React', 'pytest'],
+      role: 'Solo: API pipeline, aggregation engine, and frontend.',
+      contributions: [
+        'POST /v1/query turns natural-language filters into ClinicalTrials.gov API v2 calls, then normalizes and aggregates the results deterministically',
+        '6 visualization types, each with deep citations back to the source studies',
+        'Counts are computed in code, never taken from LLM output',
+        '11 pytest modules covering API contracts, normalization, and the visualization engine',
+      ],
+      problem: 'Researchers want quick answers about trial landscapes, but LLMs make up numbers.',
+      approach:
+        'The LLM only parses intent; retrieval, counting, and chart specs are deterministic and cited.',
+      outcome: 'Frontend-ready chart specs whose numbers trace back to the source studies.',
+      metrics: [
+        { value: '6', label: 'Chart types' },
+        { value: '11', label: 'pytest modules' },
+      ],
+    },
+    {
+      id: 'llm-fine-tuning',
+      tier: 'featured',
+      title: 'LLM Fine-Tuning: Code Generation',
+      category: 'Personal · LLM',
+      date: 'Apr 2026',
+      sortDate: '2026-04',
+      cardDescription: 'LLaMA 3.2 3B + QLoRA · ROUGE-L 0.33 → 0.55 (+65%) · Hugging Face demo',
+      image: '/projects/llm-fine-tuning.svg',
+      imageAlt:
+        'Before and after chart: ROUGE-L rises from 0.33 to 0.55 and BERTScore F1 from 0.78 to 0.89 after fine-tuning',
+      link: HUGGINGFACE_PROFILE,
+      github: GITHUB_REPOS.llmFineTuning,
+      technologies: ['PyTorch', 'QLoRA', 'PEFT', 'HuggingFace', 'Gradio', 'MLflow'],
+      role: 'Solo: fine-tuning pipeline, evaluation, and demo deployment.',
+      contributions: [
+        'Fine-tuned LLaMA 3.2 (3B) on CodeAlpaca-20k with 4-bit QLoRA, training about 1% of the parameters',
+        'On 200 held-out samples: ROUGE-L 0.546 vs 0.330 for the base model (+65%), BERTScore F1 0.886 vs 0.784 (+13%)',
+        'Tracked runs with MLflow and Weights & Biases; adapter and Gradio demo on Hugging Face, synced by GitHub Actions',
+      ],
+      problem:
+        'General-purpose small LLMs underperform on instruction-following code generation without targeted fine-tuning.',
+      approach:
+        'Parameter-efficient fine-tuning with QLoRA on a free Colab T4, evaluated on a held-out set with ROUGE-L and BERTScore.',
+      outcome: 'A small open model that follows code instructions much better than its base, with a public demo.',
+      metrics: [
+        { value: '+65%', label: 'ROUGE-L' },
+        { value: '+13%', label: 'BERTScore F1' },
       ],
     },
     {
       id: 'multi-agent',
+      tier: 'featured',
       title: 'Multi-Agent LLM Research Assistant',
-      category: 'Research · Agents',
-      date: 'Jan 2026',
+      category: 'Personal · Agents',
+      date: 'May 2026 – Present',
+      sortDate: '2026-09',
       cardDescription:
-        'LangGraph · 10K docs · 40% latency reduction · FastAPI microservice',
-      image: PLACEHOLDER_IMG,
+        'LangGraph retriever, summarizer, and critic agents over PDFs and arXiv papers · FastAPI',
+      image: '/projects/multi-agent.svg',
+      imageAlt:
+        'Agent graph: a question flows through retriever, summarizer, and critic agents, with a loop back for revision',
       link: '',
       github: GITHUB_REPOS.multiAgent,
-      featured: true,
-      featuredSpan: false,
-      technologies: ['LangGraph', 'OpenAI', 'ChromaDB', 'FastAPI'],
-      role: 'Solo — multi-agent orchestration and API design.',
+      technologies: ['LangGraph', 'OpenAI API', 'ChromaDB', 'FastAPI', 'PyMuPDF'],
+      role: 'Solo: agent workflow and API.',
       contributions: [
-        'LangGraph agent workflow for research synthesis across 10K documents',
-        '40% latency reduction via parallel agent execution',
-        'FastAPI microservice with ChromaDB vector store',
+        'LangGraph workflow with retriever, summarizer, and critic agents for multi-hop research questions',
+        'Ingests PDFs (PyMuPDF) and arXiv papers into a ChromaDB index with sentence-transformers embeddings',
+        'Runs independent agent steps in parallel; served through FastAPI',
       ],
       problem:
-        'Single-agent RAG systems struggle with complex research queries requiring multi-step reasoning.',
+        'Single-pass RAG struggles with research questions that need several rounds of retrieval and synthesis.',
       approach:
-        'LangGraph multi-agent architecture with specialized agents for retrieval, synthesis, and validation.',
-      outcome: '40% faster responses with improved answer quality on multi-hop queries.',
+        'Specialized agents for retrieval, summarization, and critique, coordinated by a LangGraph graph.',
+    },
+
+    {
+      id: 'career-ops',
+      tier: 'more',
+      title: 'Career Ops: Job Ingest & Resume Tooling',
+      category: 'Personal · Data Platform',
+      date: 'Jun 2026 – Present',
+      sortDate: '2026-10',
+      cardDescription:
+        'Ingests postings from 10+ job boards, dedupes them in SQLite, and generates tailored resumes · 800+ pytest tests',
+      link: '',
+      github: '',
+      technologies: ['Python', 'FastAPI', 'Pydantic', 'SQLite', 'Playwright', 'pytest'],
+      role: 'Solo. Private repository.',
+      contributions: [
+        'FastAPI ingestion from 10+ sources (Greenhouse, Lever, Ashby, Workday, SmartRecruiters, GitHub listings, and a LinkedIn extension)',
+        'Pydantic normalization and SQLite deduplication with per-source fault isolation',
+        'Resume pack generator (LaTeX) with an ATS parse check on every PDF',
+        'Corpus of 190+ logged job descriptions with keyword reports by role family',
+        '60+ pytest modules, 800+ tests',
+      ],
       metrics: [
-        { value: '10K', label: 'Doc corpus' },
-        { value: '40%', label: 'Latency reduction' },
+        { value: '10+', label: 'Job sources' },
+        { value: '800+', label: 'pytest tests' },
+      ],
+    },
+    {
+      id: 'buildflow',
+      tier: 'more',
+      title: 'BuildFlow: C++ Build & Regression Runner',
+      category: 'Personal · Systems',
+      date: 'Oct 2026',
+      sortDate: '2026-10',
+      cardDescription:
+        'C++17 DAG scheduler · 3.07x faster on 4 workers · 16 GoogleTest + 6 pytest tests, clean under ASan/UBSan',
+      link: '',
+      github: '',
+      technologies: ['C++17', 'CMake', 'GoogleTest', 'Python', 'pytest'],
+      role: 'Solo. Repository not public yet.',
+      contributions: [
+        "Schedules a 32-job, 49-edge build/test DAG with Kahn's topological sort and a priority queue on 4 worker threads: 3.07x faster than 1 worker (median of 5, simulated jobs)",
+        'Process-tree timeouts and retries capped at 2; a baseline-vs-candidate diff triaged 8 of 8 seeded failure types',
+        'Clean under ASan/UBSan and Valgrind (0 errors), clang-tidy clean, 88.4% library line coverage',
+      ],
+      metrics: [
+        { value: '3.07x', label: '4 workers vs 1' },
+        { value: '8/8', label: 'Seeded failures triaged' },
       ],
     },
     {
       id: 'satellite-segmentation',
+      tier: 'more',
       title: 'Satellite Image Segmentation Pipeline',
-      category: 'Computer Vision · CV',
+      category: 'Personal · Computer Vision',
       date: 'Feb 2026',
-      cardDescription: 'SAM2 · mIoU 0.62 · pixel acc. 0.78 · CUDA GPU inference',
-      image: PLACEHOLDER_IMG,
+      sortDate: '2026-02',
+      cardDescription: 'SAM2 on satellite imagery · mIoU 0.62 · pixel accuracy 0.78 on 17 test images',
       link: '',
       github: GITHUB_REPOS.satelliteSegmentation,
-      featured: true,
-      featuredSpan: false,
       technologies: ['SAM2', 'PyTorch', 'CUDA', 'OpenCV'],
-      role: 'Solo research / engineering — end-to-end pipeline and evaluation.',
+      role: 'Solo: end-to-end pipeline and evaluation.',
       contributions: [
-        'SAM2-based segmentation workflow for multi-class land-cover features',
-        'Custom PyTorch/NumPy metrics (IoU, pixel accuracy) on a held-out test set',
-        'GPU memory tuning: inference mode, CUDA cache handling for large tiles',
+        'SAM2-based segmentation workflow for land-cover and infrastructure features',
+        'Vectorized per-class IoU and pixel-accuracy evaluation across 17 test images',
+        'GPU memory tuning (inference mode, CUDA cache handling) for large tiles',
       ],
-      problem:
-        'Automating reliable extraction of infrastructure and land-cover features from large satellite scenes.',
-      approach:
-        'SAM2-based segmentation pipeline with custom evaluation harness and memory-conscious inference.',
-      outcome: 'Strong segmentation quality with stable runs on large imagery.',
       metrics: [
         { value: '0.62', label: 'mIoU' },
         { value: '0.78', label: 'Pixel accuracy' },
       ],
     },
     {
-      id: 'iit-bombay-analytics',
-      title: 'Analytics Platform @ IIT Bombay (Asia Top-5)',
-      category: 'Professional · Full-Stack',
-      date: 'Sep 2024',
+      id: 'better-beings',
+      tier: 'more',
+      title: 'Better Beings: Wellness Booking Platform',
+      category: 'Production · Full-Stack',
+      date: 'Jun 2026 – Present',
+      sortDate: '2026-09',
       cardDescription:
-        'Deployed to 20+ faculty · 60% faster setup · 100+ templates via Figma-to-HTML parser · 40% UI response improvement',
-      image: PLACEHOLDER_IMG,
+        'Booking site and admin dashboard for a mental health practice · Vue 3 + Supabase · live in production',
       link: '',
       github: '',
-      featured: true,
-      featuredSpan: true,
-      technologies: ['PHP', 'MySQL', 'Yii', 'AJAX', 'TypeScript'],
-      role: 'Research intern — full-stack analytics platform.',
+      technologies: ['Vue 3', 'Supabase', 'Pinia', 'Vercel'],
+      role: 'Solo. Built for a real practice.',
       contributions: [
-        'PHP/JavaScript data visualization and theme builder for 20+ professors',
-        'Figma-to-HTML parser with drag-and-drop and 100+ report templates',
-        'MySQL optimization with indexing and AJAX for 500+ layout configurations',
+        'Vue 3 + Supabase booking flow with admin approval and slot management',
+        'Content-driven copy, light and dark themes, and accessible UI patterns',
+        'Deployed on Vercel with a row-level-security Supabase backend',
       ],
-      problem:
-        'Faculty needed a flexible analytics platform with rapid dashboard setup and reusable reporting themes.',
-      approach:
-        'Yii Framework full-stack platform with Figma-to-HTML parser, drag-and-drop builder, and optimized MySQL backend.',
-      outcome:
-        '60% faster setup, 100+ templates, 40% UI response improvement across 20+ faculty deployments.',
+    },
+    {
+      id: 'iit-bombay-analytics',
+      tier: 'more',
+      title: 'Analytics Platform @ IIT Bombay',
+      category: 'Professional · Full-Stack',
+      date: 'Feb – Sep 2024',
+      sortDate: '2024-09',
+      cardDescription:
+        'Used by 20+ faculty · ~60% faster dashboard setup · 100+ templates from a Figma-to-HTML parser',
+      link: '',
+      github: '',
+      technologies: ['PHP', 'MySQL', 'Yii', 'AJAX', 'TypeScript'],
+      role: 'ML/Data Research Intern: full-stack analytics platform.',
+      contributions: [
+        'Data visualization and theme builder for 20+ faculty',
+        'Figma-to-HTML parser with drag-and-drop and 100+ reusable report templates',
+        'MySQL indexing across 500+ layout configurations plus AJAX loading, cutting latency by ~40–80%',
+      ],
       metrics: [
         { value: '20+', label: 'Faculty users' },
-        { value: '60%', label: 'Faster setup' },
+        { value: '~60%', label: 'Faster setup' },
         { value: '100+', label: 'Templates' },
       ],
     },
+
     {
       id: 'gui-testing-survey',
+      tier: 'publication',
       title: 'Automated GUI Testing to Enhance UX',
       category: 'Publication · First Author',
       date: 'Springer 2024',
-      cardDescription: 'Survey of the State of the Art — Springer',
-      image: PLACEHOLDER_IMG,
+      sortDate: '2024-01',
+      cardDescription: 'A Survey of the State of the Art · Springer',
       link: 'https://link.springer.com/chapter/10.1007/978-981-97-6700-5_18',
       github: '',
-      featured: false,
-      featuredSpan: false,
       isPublication: true,
       technologies: ['Springer', 'First Author', 'GUI Testing', 'UX'],
-      role: 'First author — literature survey and analysis.',
       problem:
-        'Lack of comprehensive survey connecting automated GUI testing methods to UX outcomes.',
-      approach:
-        'Systematic survey of state-of-the-art automated GUI testing techniques and their UX impact.',
+        'No survey connected automated GUI testing methods to their effect on user experience.',
       outcome: 'Published as first author in Springer proceedings, 2024.',
       abstract:
-        'A comprehensive survey examining automated GUI testing approaches and their role in enhancing user experience across modern software applications.',
+        'A survey of automated GUI testing approaches and their role in improving user experience across modern software applications.',
     },
     {
       id: 'blockchain-donation',
+      tier: 'publication',
       title: 'Blockchain Donation Transparency',
       category: 'Publication · Co-Author',
       date: 'IEEE 2024',
-      cardDescription: 'Disaster Relief transparency via blockchain — IEEE',
-      image: PLACEHOLDER_IMG,
+      sortDate: '2024-01',
+      cardDescription: 'Disaster relief donation tracking on a blockchain · IEEE',
       link: 'https://ieeexplore.ieee.org/document/10499547',
       github: '',
-      featured: false,
-      featuredSpan: false,
       isPublication: true,
       technologies: ['Blockchain', 'IEEE', 'Smart Contracts'],
-      role: 'Co-author — system design and implementation.',
       problem:
-        'Disaster relief donations lack transparency, reducing donor trust and aid effectiveness.',
-      approach:
-        'Blockchain-based donation tracking system ensuring end-to-end transparency for disaster relief funds.',
-      outcome: 'Published co-author paper at IEEE, 2024.',
+        'Disaster relief donations lack transparency, which reduces donor trust and aid effectiveness.',
+      outcome: 'Published as co-author at IEEE, 2024.',
       abstract:
-        'A blockchain solution for transparent disaster relief donation tracking, ensuring donors can verify fund allocation and impact.',
+        'A blockchain system for transparent disaster relief donation tracking, so donors can verify how funds are allocated.',
     },
   ],
 
@@ -393,18 +545,23 @@ export const portfolioData = {
       name: 'Summer & Spring School on Advanced Engineering and Data Science',
       issuer: 'Tokushima University, Japan',
       date: '2023',
-      credentialId: '',
-      link: '',
     },
   ],
 
-  awards: [
+  publications: [
     {
-      title: 'Publications',
-      issuer: 'Springer & IEEE',
+      title: 'Automated GUI Testing to Enhance UX: A Survey of the State of the Art',
+      venue: 'Springer',
+      role: 'First author',
       date: '2024',
-      description:
-        'First author, Springer (Automated GUI Testing, UX); co-author, IEEE (Blockchain for Disaster Relief).',
+      link: 'https://link.springer.com/chapter/10.1007/978-981-97-6700-5_18',
+    },
+    {
+      title: 'Increasing Donation Transparency in Disaster Relief: A Blockchain-based Solution',
+      venue: 'IEEE',
+      role: 'Co-author',
+      date: '2024',
+      link: 'https://ieeexplore.ieee.org/document/10499547',
     },
   ],
 }

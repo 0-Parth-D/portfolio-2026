@@ -25,7 +25,7 @@
 }
 
 .site-footer__label {
-  color: var(--color-cream-20);
+  color: var(--color-cream-muted);
   font-size: 0.5625rem;
   margin-bottom: 4px;
 }
@@ -82,8 +82,14 @@
 
 .site-footer__email {
   font-size: 0.5625rem;
-  color: var(--color-cream-20);
+  color: var(--color-cream-muted);
   margin-top: 8px;
+}
+
+.site-footer__location {
+  font-size: 0.5625rem;
+  color: var(--color-cream-60);
+  margin-top: 4px;
 }
 
 @media (max-width: 809px) {
